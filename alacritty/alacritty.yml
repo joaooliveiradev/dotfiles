@@ -1,0 +1,38 @@
+live_config_reload: true
+
+window:
+  dimensions:
+    columns: 150
+    lines: 50
+
+  padding:
+    x: 10
+    y: 10
+
+  decorations: None
+
+  startup_mode: windowed
+
+font:
+  size: 14
+
+mouse:
+  hide_when_typing: true
+
+cursor:
+  style: Beam
+  vi_style_cursor: Beam
+
+key_bindings:
+  - { key: V, mods: Shift, action: Paste }
+  - { key: C, mods: Shift, action: Copy }
+  - { key: Q, mods: Control, action: Quit }
+  
+
+# Import themes for the catppuccin theme
+import:
+   - ~/.config/alacritty/themes/catppuccin/catppuccin-mocha.yml
+#  - ~/.config/alacritty/themes/catppuccin/catppuccin-macchiato.yml
+#  - ~/.config/alacritty/themes/catppuccin/catppuccin-frappe.yml
+#  - ~/.config/alacritty/themes/catppuccin/catppuccin-latte.yml
+
