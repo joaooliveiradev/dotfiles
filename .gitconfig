@@ -1,0 +1,6 @@
+[user]
+    name = Joao Oliveira
+[alias]
+    s = status
+[init]
+    defaultBranch = main
