@@ -1,0 +1,13 @@
+{
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.minimap.enabled": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "workbench.startupEditor": "none",
+    "window.titleBarStyle": "custom",
+    "editor.fontFamily": "Menlo, Consolas, monospace",
+    "editor.fontSize": 16,
+    "terminal.integrated.fontSize": 16,
+    "workbench.colorTheme": "Tokyo Night",
+    "window.zoomLevel": 1
+}
