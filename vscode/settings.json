@@ -1,13 +1,35 @@
 {
-    "workbench.iconTheme": "material-icon-theme",
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.minimap.enabled": false,
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "workbench.startupEditor": "none",
-    "window.titleBarStyle": "custom",
-    "editor.fontFamily": "Menlo, Consolas, monospace",
-    "editor.fontSize": 16,
-    "terminal.integrated.fontSize": 16,
-    "workbench.colorTheme": "Tokyo Night",
-    "window.zoomLevel": 1
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.minimap.enabled": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "workbench.startupEditor": "none",
+  "window.titleBarStyle": "custom",
+  "editor.fontFamily": "Menlo, Consolas, monospace",
+  "editor.fontSize": 16,
+  "terminal.integrated.fontSize": 16,
+  "workbench.colorTheme": "Tokyo Night",
+  "window.zoomLevel": 1,
+  "workbench.sideBar.location": "right",
+  "extensions.ignoreRecommendations": true,
+  // *** ReScript ***
+  //  Hide Generate Res Files from ReScript
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.res": "${capture}.mjs, ${capture}.js, ${capture}.cmi, ${capture}.cmt, ${capture}.cmj",
+    "*.resi": "${capture}.res"
+  },
+  // Whether you want the extension to prompt for autostarting a ReScript build if a project is opened with no build running
+  "rescript.settings.askToStartBuild": false,
+  // *** VIM ***
+  "vim.handleKeys": {
+    "<C-w>": false
+  },
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "k"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.leader": "<space>"
 }

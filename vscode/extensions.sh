@@ -12,3 +12,8 @@ code --install-extension pmndrs.pmndrs
 code --install-extension styled-components.vscode-styled-components
 code --install-extension usernamehw.errorlens
 code --install-extension wix.vscode-import-cost
+code --instal-extension vscodevim.vim
+code --instal-extension Gruntfuggly.todo-tree
+
+
+
