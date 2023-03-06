@@ -9,3 +9,6 @@ ln -s $PWD/i3 ~/.config/i3
 
 rm -rf ~/.config/wallpapers
 ln -s $PWD/wallpapers ~/.config/wallpapers
+
+rm -rf ~/.config/polybar
+ln -s $PWD/polybar ~/.config/polybar
