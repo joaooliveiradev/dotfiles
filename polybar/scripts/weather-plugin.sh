@@ -63,5 +63,5 @@ if [ "$current" ]; then
         trend=""
     fi
 
-    echo " $(get_icon "$current_icon")  $current_temp$SYMBOL"
+    echo " $(get_icon "$current_icon") $current_temp$SYMBOL"
 fi
