@@ -147,6 +147,9 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -226,3 +229,4 @@ smart_gaps on
 # Open certain apps in floating mode by default
 for_window [class="HelperAlacritty"] floating enable, resize set 800 600, move scratchpad
 for_window [class="Pavucontrol"] floating enable, resize set 650 400, move position center
+for_window [class="Google-chrome" instance="google-chrome" window_role="pop-up"] floating enable, resize set 500 780 
