@@ -30,14 +30,13 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Wallpaper
-
 exec --no-startup-id feh --bg-fill ~/.config/wallpapers/wallpaper.jpg
 
 # Polybar
 exec --no-startup-id polybar
 
-# R: Use flameshot instead of i3-scrot. Print to capture a screenshot with the UI, mod+Print to capture screen
-bindsym Print exec --no-startup-id flameshot gui
+# Picom
+exec --no-startup-id picom 
 
 ################################################################################
 #                                   KEYBINDINGS                                #
@@ -66,6 +65,9 @@ bindsym $mod+e exec pcmanfm
 bindsym $mod+r exec --no-startup-id rofi -show drun
 
 bindsym $mod+Tab exec --no-startup-id rofi -modi combi -combi-modi window -show combi
+
+# Use flameshot instead of i3-scrot. Print to capture a screenshot with the UI, mod+Print to capture screen
+bindsym Print exec --no-startup-id flameshot gui
 
 # change focus
 bindsym $mod+j focus left
@@ -109,12 +111,6 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
-# bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
 ################################################################################
 #                                   WORKSPACES                                 #
 ################################################################################
@@ -143,6 +139,11 @@ bindsym $mod+Shift+3 move container to workspace number $ws3
 bindsym $mod+Shift+4 move container to workspace number $ws4
 bindsym $mod+Shift+5 move container to workspace number $ws5
 bindsym $mod+Shift+6 move container to workspace number $ws6
+
+# Assignments
+
+assign [class="Code"] $ws1
+assign [class="Google-chrome"] $ws2
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -199,6 +200,6 @@ gaps outer -2
 smart_gaps on
 
 # Open certain apps in floating mode by default
-for_window [class="HelperAlacritty"] floating enable, resize set 800 600, move scratchpad
-for_window [class="Pavucontrol"] floating enable, resize set 650 400, move position center
+for_window [class="Code"] floating enable, resize set 1750 900, move position center
 for_window [class="Google-chrome" instance="google-chrome" window_role="pop-up"] floating enable, resize set 500 780 
+for_window [class="Pavucontrol"] floating enable, resize set 650 400, move position center
