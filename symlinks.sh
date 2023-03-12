@@ -12,3 +12,6 @@ ln -s $PWD/wallpapers ~/.config/wallpapers
 
 rm -rf ~/.config/polybar
 ln -s $PWD/polybar ~/.config/polybar
+
+rm -rf ~/.config/picom
+ln -s $PWD/picom ~/.config/picom
