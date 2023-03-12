@@ -36,6 +36,9 @@ exec --no-startup-id feh --bg-fill ~/.config/wallpapers/wallpaper.jpg
 # Polybar
 exec --no-startup-id polybar
 
+# R: Use flameshot instead of i3-scrot. Print to capture a screenshot with the UI, mod+Print to capture screen
+bindsym Print exec --no-startup-id flameshot gui
+
 ################################################################################
 #                                   KEYBINDINGS                                #
 ################################################################################
