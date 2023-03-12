@@ -59,6 +59,9 @@ bindsym $mod+g exec google-chrome-stable
 # kill focused window
 bindsym $mod+w kill
 
+# start pcman file manager
+bindsym $mod+e exec pcmanfm
+
 # start rofi (a program launcher)
 bindsym $mod+r exec --no-startup-id rofi -show drun
 
@@ -97,10 +100,8 @@ bindsym $mod+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
+# change container layout split
+bindsym $mod+s layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -179,38 +180,6 @@ mode "resize" {
 }
 
 bindsym $mod+Ctrl+r mode "resize"
-
-################################################################################
-#                                   THEME & i3BAR                                #
-################################################################################
-
-# class                 border  bground text    indicator child_border
-client.focused          #4c7899 #3477ad #ffffff #3477ad   #3477ad
-client.focused_inactive #abb2bf #5f676a #ffffff #abb2bf   #abb2bf
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #cc241d #900000 #ffffff #cc241d   #cc241d
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-
-client.background       #ffffff
-
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-# bar {
-#   colors {
-#     background #000000
-#     statusline #FFFFFF
-#     separator  #666666
-
-#     focused_workspace  #83CAFA #51A2DA #FFFFFF
-#     active_workspace   #3C6EB4 #294172 #FFFFFF
-#     inactive_workspace #8C8C8C #4C4C4C #888888
-#     urgent_workspace   #EC69A0 #DB3279 #FFFFFF
-#     binding_mode       #b691d3 #A07CBC #FFFFFF
-#   }
-#   status_command i3status
-# }
-
 
 ################################################################################
 #                                   RULES                                      #
