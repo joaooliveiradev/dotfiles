@@ -103,7 +103,7 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+s layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+x floating toggle ; [floating] resize set 1750 900 ; move position center
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -175,20 +175,16 @@ bindsym $mod+Ctrl+r mode "resize"
 #                                   RULES                                      #
 ################################################################################
 
-# Include borders for all applications
-for_window [class="^.*"] border pixel 4
-
 # Hide borders on workspaces with only one window visible
 hide_edge_borders smart
 
 # Gaps size
 gaps inner 10
-gaps outer -2
+gaps outer 2
 
-# smart gaps
-smart_gaps on
-
-# Open certain apps in floating mode by default
-for_window [class="Code"] floating enable, resize set 1750 900, move position center
+# Giving focus to some applications and adding floating to others. // Find the class or instance typing 'xprop' on the terminal.
+for_window [class="^.*"] border pixel 2
+for_window [class="Code"] floating enable, focus, resize set 1750 900, move position center
 for_window [class="Google-chrome" instance="google-chrome" window_role="pop-up"] floating enable, resize set 500 780 
-for_window [class="Alacritty"] floating enable, resize set 1750 800, move position center
+for_window [class="Google-chrome" instance="google-chrome"] focus, resize set 1750 900, move position center
+for_window [class="Alacritty"] floating enable, focus, resize set 1750 900, move position center
