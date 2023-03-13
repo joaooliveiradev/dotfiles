@@ -31,8 +31,9 @@ key_bindings:
 
 # Import themes for the catppuccin theme
 import:
-   - ~/.config/alacritty/themes/catppuccin/catppuccin-mocha.yml
-#  - ~/.config/alacritty/themes/catppuccin/catppuccin-macchiato.yml
+  - ~/.config/alacritty/themes/tokyo-night/tokyo-night.yml
+#  - ~/.config/alacritty/themes/catppuccin/catppuccin-mocha.yml
+#   - ~/.config/alacritty/themes/catppuccin/catppuccin-macchiato.yml
 #  - ~/.config/alacritty/themes/catppuccin/catppuccin-frappe.yml
 #  - ~/.config/alacritty/themes/catppuccin/catppuccin-latte.yml
 
