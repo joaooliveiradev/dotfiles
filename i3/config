@@ -1,6 +1,3 @@
-# DOCUMENTATION: http://i3wm.org/docs/userguide.html 
-
-
 ################################################################################
 #                                   GENERAL DEFINITIONS                        #
 ################################################################################
@@ -56,7 +53,7 @@ bindsym $mod+a exec alacritty
 bindsym $mod+g exec google-chrome-stable
 
 # kill focused window
-bindsym $mod+w kill
+bindsym $mod+Shift+w kill
 
 # start pcman file manager
 bindsym $mod+e exec pcmanfm
@@ -141,9 +138,9 @@ bindsym $mod+Shift+5 move container to workspace number $ws5
 bindsym $mod+Shift+6 move container to workspace number $ws6
 
 # Assignments
-
 assign [class="Code"] $ws1
-assign [class="Google-chrome"] $ws2
+assign [class="Alacritty"] $ws2
+assign [class="Google-chrome"] $ws3
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -157,24 +154,16 @@ floating_modifier $mod
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
         bindsym semicolon resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape or $mod+Shift+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+Ctrl+r mode "default"
@@ -202,4 +191,4 @@ smart_gaps on
 # Open certain apps in floating mode by default
 for_window [class="Code"] floating enable, resize set 1750 900, move position center
 for_window [class="Google-chrome" instance="google-chrome" window_role="pop-up"] floating enable, resize set 500 780 
-for_window [class="Pavucontrol"] floating enable, resize set 650 400, move position center
+for_window [class="Alacritty"] floating enable, resize set 1750 800, move position center
