@@ -10,8 +10,11 @@ ZSH_THEME="robbyrussell"
 # Execute some shell comands
 source $ZSH/oh-my-zsh.sh
 
-# Plugins
+# Start NVM
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /usr/share/nvm/init-nvm.sh
 
+# Plugins
 plugins=(
     git
     zsh-autosuggestions
@@ -22,4 +25,4 @@ plugins=(
 # Alias
 # Fly.io
 alias flyctl="$HOME/.fly/bin/flyctl"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
