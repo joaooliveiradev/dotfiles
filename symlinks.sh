@@ -15,3 +15,6 @@ ln -s $PWD/polybar ~/.config/polybar
 
 rm -rf ~/.config/picom
 ln -s $PWD/picom ~/.config/picom
+
+rm -rf ~/.zshrc
+ln -s $PWD/zsh/.zshrc ~/.zshrc

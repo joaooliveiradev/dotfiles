@@ -10,11 +10,16 @@ ZSH_THEME="robbyrussell"
 # Execute some shell comands
 source $ZSH/oh-my-zsh.sh
 
-#This line loads the NVM to ZSH 
-export NVM_DIR=~/.nvm
- [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+# Plugins
+
+plugins=(
+    git
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    fzf
+)
 
 # Alias
-
 # Fly.io
-alias flyctl='$HOME/.fly/bin/flyctl'
+alias flyctl="$HOME/.fly/bin/flyctl"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
