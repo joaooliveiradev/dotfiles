@@ -28,8 +28,7 @@ key_bindings:
   - { key: C, mods: Shift, action: Copy }
   - { key: Q, mods: Control, action: Quit }
   
-
-# Import themes for the catppuccin theme
+# Import themes
 import:
   - ~/.config/alacritty/themes/tokyo-night/tokyo-night.yml
 #  - ~/.config/alacritty/themes/catppuccin/catppuccin-mocha.yml

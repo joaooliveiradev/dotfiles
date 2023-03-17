@@ -99,11 +99,8 @@ bindsym $mod+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout split
-bindsym $mod+s layout toggle split
-
 # toggle tiling / floating
-bindsym $mod+x floating toggle ; [floating] resize set 1750 900 ; move position center
+bindsym $mod+d floating toggle; [floating] resize set 1750 900 ; move position center
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -141,7 +138,8 @@ bindsym $mod+Shift+6 move container to workspace number $ws6
 assign [class="Code"] $ws1
 assign [class="Alacritty"] $ws2
 assign [class="Google-chrome"] $ws3
-assign [class="discord"] $ws4
+assign [class="Slack"] $ws4
+assign [class="discord"] $ws5
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -188,4 +186,5 @@ for_window [class="^.*"] border pixel 2
 for_window [class="Code"] focus, floating enable, resize set 1700 850, move position center
 for_window [class="Google-chrome" window_role="pop-up"] focus, floating enable, resize set 500 780 
 for_window [class="Google-chrome" instance="google-chrome"] focus
+for_window [class="Slack"] focus,
 for_window [class="Alacritty"] focus, floating enable, resize set 1750 900, move position center
