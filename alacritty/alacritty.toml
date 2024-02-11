@@ -1,0 +1,38 @@
+import = ["/home/joaooliveiradev/.config/alacritty/themes/tokyo-night/tokyo-night.toml"]
+live_config_reload = true
+
+[cursor]
+style = "Beam"
+
+[font]
+size = 14
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "Quit"
+key = "Q"
+mods = "Control"
+
+[mouse]
+hide_when_typing = true
+
+[window]
+decorations = "None"
+startup_mode = "windowed"
+
+[window.dimensions]
+columns = 150
+lines = 50
+
+[window.padding]
+x = 10
+y = 10

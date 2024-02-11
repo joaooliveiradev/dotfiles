@@ -178,12 +178,14 @@ bindsym $mod+Ctrl+r mode "resize"
 # Hide borders on workspaces with only one window visible
 hide_edge_borders smart
 
+# Hide title border on workspaces
+default_border pixel 1
+
 # Gaps size
 gaps inner 10
 gaps outer 2
 
 # Giving focus to some applications and adding floating to others. // Find the class or instance typing 'xprop' on the terminal.
-for_window [class="^.*"] focus, border pixel 2
 for_window [class="Code"] focus, floating enable, resize set 1700 850, move position center
 for_window [class="Brave-browser" window_role="pop-up"] focus, floating enable, resize set 500 780 
 for_window [class="Brave-browser"] focus
