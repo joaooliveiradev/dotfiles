@@ -1,11 +1,11 @@
-import = ["/home/joaooliveiradev/.config/alacritty/themes/tokyo-night/tokyo-night.toml"]
+import = ["/home/joaooliveiradev/.config/alacritty/themes/tokyo-night.toml"]
 live_config_reload = true
 
 [cursor]
 style = "Beam"
 
 [font]
-size = 14
+size = 16
 
 [[keyboard.bindings]]
 action = "Paste"

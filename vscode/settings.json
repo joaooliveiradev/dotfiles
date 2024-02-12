@@ -1,31 +1,70 @@
 {
-  // *** Editor ***
-  "workbench.iconTheme": "material-icon-theme",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.minimap.enabled": false,
+  // vscode meta stuff
   "workbench.startupEditor": "none",
+  "editor.accessibilitySupport": "off",
+  // text editing stuff
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.linkedEditing": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.unicodeHighlight.nonBasicASCII": false,
+  "editor.renderWhitespace": "none",
+  //fonts
+  "editor.fontSize": 16,
+  "editor.fontFamily": "Menlo",
+  //cursor
+  "editor.cursorBlinking": "smooth", // smooth cursor animation, looks nice
+  "editor.cursorSmoothCaretAnimation": "on", // move cursor smoothly
+  //window
+  //identation
+  "editor.guides.indentation": false,
+  //zoom
+  "window.zoomLevel": 1,
+  //top bar
   "window.titleBarStyle": "custom",
-  "editor.fontFamily": "Menlo, Consolas, monospace",
-  "terminal.integrated.fontSize": 16,
-  "workbench.sideBar.location": "right",
-  "extensions.ignoreRecommendations": true,
-  "editor.lineNumbers": "relative",
-  "window.commandCenter": false,
-  "workbench.layoutControl.enabled": false,
-  "window.menuBarVisibility": "compact",
-  "terminal.integrated.tabs.enabled": false,
-  "editor.fontSize": 18,
+  "window.title": " ${dirty}  ",
+  //"workbench.editor.showTabs": "none", // hide tabs
+  "breadcrumbs.enabled": false, // hides breadcrumb path at top of window
+  "window.commandCenter": false, // hides command center at the top of the window. Use cmd+shift+p instead
+  "workbench.layoutControl.enabled": false, // hides those little squares on the top right of the window
+  // minimap
+  "editor.minimap.enabled": false,
+  "editor.hideCursorInOverviewRuler": true, // hide sidebar icons, use cmd+b to toggle open
+  "workbench.sideBar.location": "right", // puts sidebar on the right, less disruptive (doesn't shift code if text wrap is disabled) when opening with cmd+b
+  //bottom bar
+  "workbench.statusBar.visible": false, // keep block name fixed at top when scrolling
+  "gitlens.mode.active": "zen", // toggle with command palette, zen mode hides gitlens stuff for when you don't need it
+  "editor.wordWrap": "on",
+  //sidebar
+  "workbench.activityBar.location": "hidden",
+  "editor.scrollbar.vertical": "hidden",
+  //editor general
+  "editor.tabSize": 2, // set tab size to 2 spaces
   "workbench.colorTheme": "Tokyo Night",
-  // *** ReScript ***
-  //  Hide Generate Res Files from ReScript
-  "explorer.fileNesting.enabled": true,
-  "explorer.fileNesting.patterns": {
-    "*.res": "${capture}.mjs, ${capture}.js, ${capture}.cmi, ${capture}.cmt, ${capture}.cmj",
-    "*.resi": "${capture}.res"
+  "workbench.iconTheme": "symbols",
+  "editor.lineNumbers": "relative",
+  // js tooling stuff
+  "typescript.preferences.importModuleSpecifier": "non-relative", // prefer aliases when importing
+  "eslint.options": {
+    "extensions": [".js", ".jsx", ".mdx", ".ts", ".tsx"]
   },
-  // Whether you want the extension to prompt for autostarting a ReScript build if a project is opened with no build running
-  "rescript.settings.askToStartBuild": false,
+  "eslint.validate": [
+    "mdx",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "tailwindCSS.experimental.classRegex": [
+    // enables tailwind autocomplete for specified functions
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
   // *** VIM ***
+  "vim.leader": "<space>",
+  "symbols.hidesExplorerArrows": false,
+  "extensions.ignoreRecommendations": true,
   "vim.handleKeys": {
     "<C-w>": false
   },
@@ -35,8 +74,11 @@
       "after": ["<Esc>"]
     }
   ],
-  "vim.leader": "<space>",
-  "[elixir]": {
-    "editor.defaultFormatter": "JakeBecker.elixir-ls"
+  // nesting files
+  "explorer.fileNesting.patterns": {
+    "package.json": ".eslint*, prettier*, tsconfig*, vite*, pnpm-lock*, bun.lockb, nest*",
+    "tailwind.config.js": "tailwind.config*, postcss.config*",
+    ".env.local": ".env*",
+    ".env": ".env*"
   }
 }

@@ -6,7 +6,6 @@
 set $mod Mod1
 font pango:Roboto Medium 10
 
-
 ################################################################################
 #                                   START APPLICATIONS                         #
 ################################################################################
@@ -27,7 +26,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Wallpaper
-exec --no-startup-id feh --bg-scale ~/.config/wallpapers/wallpaper2.jpg
+exec --no-startup-id feh --bg-scale ~/.config/wallpapers/wallpaper.jpg
 
 # Polybar
 exec --no-startup-id polybar
@@ -61,8 +60,6 @@ bindsym $mod+e exec pcmanfm
 # start rofi (a program launcher)
 bindsym $mod+r exec --no-startup-id rofi -show drun
 
-bindsym $mod+Tab exec --no-startup-id rofi -modi combi -combi-modi window -show combi
-
 # Use flameshot instead of i3-scrot. Print to capture a screenshot with the UI, mod+Print to capture screen
 bindsym Print exec --no-startup-id flameshot gui
 
@@ -77,18 +74,6 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-
-# move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+ccedilla move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+h split h
@@ -116,7 +101,6 @@ set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
-set $ws6 "6"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -124,7 +108,13 @@ bindsym $mod+2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
 bindsym $mod+4 workspace number $ws4
 bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
+
+# Assignments
+assign [class="Code"] $ws1
+assign [class="Alacritty"] $ws2
+assign [class="Brave-browser"] $ws3
+assign [class="discord"] $ws4
+assign [class="^.*"] $ws5
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -132,15 +122,6 @@ bindsym $mod+Shift+2 move container to workspace number $ws2
 bindsym $mod+Shift+3 move container to workspace number $ws3
 bindsym $mod+Shift+4 move container to workspace number $ws4
 bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-
-# Assignments
-assign [class="Code"] $ws1
-assign [class="Alacritty"] $ws2
-assign [class="Brave-browser"] $ws3
-assign [class="Slack"] $ws4
-assign [class="discord"] $ws5
-assign [class="^.*"] $ws6
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -152,25 +133,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
-
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+Ctrl+r mode "default"
-}
-
-bindsym $mod+Ctrl+r mode "resize"
-
 ################################################################################
 #                                   RULES                                      #
 ################################################################################
@@ -178,16 +140,18 @@ bindsym $mod+Ctrl+r mode "resize"
 # Hide borders on workspaces with only one window visible
 hide_edge_borders smart
 
-# Hide title border on workspaces
-default_border pixel 1
+# Default border style
+for_window [class=".*"] border pixel 2 
 
 # Gaps size
 gaps inner 10
-gaps outer 2
+gaps outer 4
 
 # Giving focus to some applications and adding floating to others. // Find the class or instance typing 'xprop' on the terminal.
-for_window [class="Code"] focus, floating enable, resize set 1700 850, move position center
+for_window [class="Code"] focus, floating enable, resize set 1600 800, move position center
 for_window [class="Brave-browser" window_role="pop-up"] focus, floating enable, resize set 500 780 
 for_window [class="Brave-browser"] focus
-for_window [class="Slack"] focus,
-for_window [class="Alacritty"] focus, floating enable, resize set 1750 900, move position center
+for_window [class="Alacritty"] focus, floating enable, resize set 1600 800, move position center
+
+# Changing window colors        border  |   backg   |  text  |    indicator  |  child_border
+client.focused          #6a6f8f #285577 #ffffff #2e9ef4  #6a6f8f
