@@ -26,13 +26,16 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Wallpaper
-exec --no-startup-id feh --bg-scale ~/.config/wallpapers/wallpaper.jpg
+exec --no-startup-id feh --bg-scale ~/.config/wallpapers/wallpaper3.png
 
 # Polybar
 exec --no-startup-id polybar
 
 # Picom
 exec --no-startup-id picom 
+
+# Fcitx5
+exec --no-startup-id fcitx5
 
 ################################################################################
 #                                   KEYBINDINGS                                #
