@@ -35,12 +35,10 @@
   "workbench.statusBar.visible": false, // keep block name fixed at top when scrolling
   "gitlens.mode.active": "zen", // toggle with command palette, zen mode hides gitlens stuff for when you don't need it
   "editor.wordWrap": "on",
-  //sidebar
-  "workbench.activityBar.location": "hidden",
   "editor.scrollbar.vertical": "hidden",
   //editor general
-  "editor.tabSize": 2, // set tab size to 2 spaces
-  "workbench.colorTheme": "Tokyo Night",
+  "editor.tabSize": 2,
+  "workbench.colorTheme": "poimandres",
   "workbench.iconTheme": "symbols",
   "editor.lineNumbers": "relative",
   // js tooling stuff

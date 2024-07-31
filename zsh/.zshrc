@@ -26,4 +26,3 @@ plugins=(
 
 # Fly.io
 alias flyctl="$HOME/.fly/bin/flyctl"
-
