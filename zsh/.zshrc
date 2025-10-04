@@ -14,6 +14,9 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source /usr/share/nvm/init-nvm.sh
 
+# Start ASDF
+. /home/joaooliveiradev/dev/asdf-vm/pkg/asdf-vm/opt/asdf-vm/asdf.sh
+
 # Plugins
 plugins=(
     git
@@ -26,3 +29,17 @@ plugins=(
 
 # Fly.io
 alias flyctl="$HOME/.fly/bin/flyctl"
+
+# bun completions
+[ -s "/home/joaooliveiradev/.bun/_bun" ] && source "/home/joaooliveiradev/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Deletar branches diferente de main, staging e dev / develop
+function delete-branches () {
+  for i in $(git branch | grep -v -E -w '(main|staging|dev|develop)$'); do
+    git branch -D "$i"
+  done
+}

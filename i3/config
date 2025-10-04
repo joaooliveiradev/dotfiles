@@ -26,16 +26,18 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Wallpaper
-exec --no-startup-id feh --bg-scale ~/.config/wallpapers/wallpaper3.png
+exec --no-startup-id feh --bg-scale ~/.config/wallpapers/wallpaper2.jpg
 
 # Polybar
 exec --no-startup-id polybar
 
 # Picom
-exec --no-startup-id picom 
+exec --no-startup-id picom --backend glx
 
 # Fcitx5
-exec --no-startup-id fcitx5
+# exec --no-startup-id fcitx5
+# Withut fcitx5
+exec --no-startup-id setxkbmap -layout us -variant intl
 
 ################################################################################
 #                                   KEYBINDINGS                                #
@@ -65,6 +67,7 @@ bindsym $mod+r exec --no-startup-id rofi -show drun
 
 # Use flameshot instead of i3-scrot. Print to capture a screenshot with the UI, mod+Print to capture screen
 bindsym Print exec --no-startup-id flameshot gui
+
 
 # change focus
 bindsym $mod+j focus left

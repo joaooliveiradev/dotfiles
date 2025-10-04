@@ -2,10 +2,14 @@
   // vscode meta stuff
   "workbench.startupEditor": "none",
   "editor.accessibilitySupport": "off",
-  // text editing stuff
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "biomejs.biome",
   "editor.linkedEditing": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
   "editor.inlineSuggest.enabled": true,
   "editor.unicodeHighlight.nonBasicASCII": false,
   "editor.renderWhitespace": "none",
@@ -18,13 +22,9 @@
   //window
   //identation
   "editor.guides.indentation": false,
-  //zoom
-  "window.zoomLevel": 1,
   //top bar
   "window.titleBarStyle": "custom",
-  "window.title": " ${dirty}  ",
-  //"workbench.editor.showTabs": "none", // hide tabs
-  "breadcrumbs.enabled": false, // hides breadcrumb path at top of window
+  "window.title": " ${dirty}  ", // hides breadcrumb path at top of window
   "window.commandCenter": false, // hides command center at the top of the window. Use cmd+shift+p instead
   "workbench.layoutControl.enabled": false, // hides those little squares on the top right of the window
   // minimap
@@ -33,12 +33,11 @@
   "workbench.sideBar.location": "right", // puts sidebar on the right, less disruptive (doesn't shift code if text wrap is disabled) when opening with cmd+b
   //bottom bar
   "workbench.statusBar.visible": false, // keep block name fixed at top when scrolling
-  "gitlens.mode.active": "zen", // toggle with command palette, zen mode hides gitlens stuff for when you don't need it
+  // "gitlens.mode.active": "zen", // toggle with command palette, zen mode hides gitlens stuff for when you don't need it
   "editor.wordWrap": "on",
   "editor.scrollbar.vertical": "hidden",
   //editor general
   "editor.tabSize": 2,
-  "workbench.colorTheme": "poimandres",
   "workbench.iconTheme": "symbols",
   "editor.lineNumbers": "relative",
   // js tooling stuff
@@ -78,5 +77,13 @@
     "tailwind.config.js": "tailwind.config*, postcss.config*",
     ".env.local": ".env*",
     ".env": ".env*"
-  }
+  },
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.currentLine.enabled": true,
+  "editor.formatOnSave": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "window.zoomLevel": -1,
+  "workbench.colorTheme": "Noir Poimandres Dark"
 }
