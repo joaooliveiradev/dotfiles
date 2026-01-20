@@ -3,9 +3,13 @@
   "workbench.startupEditor": "none",
   "editor.accessibilitySupport": "off",
   "editor.defaultFormatter": "biomejs.biome",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "explicit"
+  },
   "editor.linkedEditing": true,
   "github.copilot.enable": {
     "*": true,
+    "typescript": true,
     "plaintext": false,
     "markdown": false,
     "scminput": false
@@ -29,8 +33,7 @@
   "workbench.layoutControl.enabled": false, // hides those little squares on the top right of the window
   // minimap
   "editor.minimap.enabled": false,
-  "editor.hideCursorInOverviewRuler": true, // hide sidebar icons, use cmd+b to toggle open
-  "workbench.sideBar.location": "right", // puts sidebar on the right, less disruptive (doesn't shift code if text wrap is disabled) when opening with cmd+b
+  "editor.hideCursorInOverviewRuler": true, // puts sidebar on the right, less disruptive (doesn't shift code if text wrap is disabled) when opening with cmd+b
   //bottom bar
   "workbench.statusBar.visible": false, // keep block name fixed at top when scrolling
   // "gitlens.mode.active": "zen", // toggle with command palette, zen mode hides gitlens stuff for when you don't need it
@@ -85,5 +88,10 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "window.zoomLevel": -1,
-  "workbench.colorTheme": "Noir Poimandres Dark"
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+  "workbench.colorTheme": "poimandres",
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "workbench.sideBar.location": "right"
 }
