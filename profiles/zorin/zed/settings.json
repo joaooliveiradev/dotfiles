@@ -1,0 +1,103 @@
+{
+  // ===== VIM MODE =====
+  "theme": "poimandres blurry",
+  "vim_mode": true,
+  "relative_line_numbers": "enabled", // Great for vim mode
+
+  // ===== EDITOR SETTINGS =====
+  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_size": 18,
+  "ui_font_size": 18,
+  "tab_size": 2,
+  "wrap_guides": [80, 100],
+
+  // ===== TABS ======
+  "tabs": {
+    "file_icons": true,
+    "git_status": true,
+  },
+
+  // ===== INDENTATION =====
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+  },
+
+  // ===== FILE MANAGEMENT =====
+  "autosave": "on_focus_change", // Options: "off", "after_delay", "on_focus_change", "on_window_change"
+  "format_on_save": "on", // Auto-format files on save
+  "ensure_final_newline_on_save": true,
+  "remove_trailing_whitespace_on_save": true,
+
+  // ===== TERMINAL =====
+  "terminal": {
+    "shell": {
+      "program": "zsh", // Change to your preferred shell: "bash", "fish", etc.
+    },
+    "font_family": "JetBrains Mono",
+    "font_size": 14,
+    "line_height": "comfortable", // Options: "comfortable", "standard", "relaxed"
+  },
+
+  // ===== GIT =====
+  "git": {
+    "git_gutter": "tracked_files", // Show git changes in gutter
+    "inline_blame": {
+      "enabled": true,
+    },
+  },
+
+  // ===== LSP & INTELLISENSE =====
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": true,
+    "show_parameter_hints": true,
+  },
+
+  // ===== PROJECT & FILES =====
+  "project_panel": {
+    "dock": "left",
+    "default_width": 240,
+  },
+  "file_types": {
+    "Dockerfile": ["Dockerfile", "Dockerfile.*"],
+    "JSON": ["*.json", ".prettierrc", ".eslintrc"],
+  },
+
+  // ===== PERFORMANCE =====
+  "journal": {
+    "path": "~/.local/share/zed/journal",
+    "hour_format": "hour24", // Options: "hour12", "hour24"
+  },
+
+  // ===== COLLABORATION =====
+  "collaboration_panel": {
+    "dock": "left",
+  },
+
+  // ===== LANGUAGE-SPECIFIC =====
+  "languages": {
+    "JavaScript": {
+      "tab_size": 2,
+      "format_on_save": "on",
+    },
+    "TypeScript": {
+      "tab_size": 2,
+      "format_on_save": "on",
+    },
+    "Python": {
+      "tab_size": 4,
+      "format_on_save": "on",
+    },
+    "Rust": {
+      "tab_size": 4,
+      "format_on_save": "on",
+    },
+  },
+
+  // ===== TELEMETRY =====
+  "telemetry": {
+    "diagnostics": false, // Send crash reports
+    "metrics": false, // Send usage statistics
+  },
+}
