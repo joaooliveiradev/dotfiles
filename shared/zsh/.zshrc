@@ -24,8 +24,8 @@ plugins=(
 [ -s "/home/joaooliveiradev/.bun/_bun" ] && source "/home/joaooliveiradev/.bun/_bun"
 
 # bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# export BUN_INSTALL="$HOME/.bun"
+# export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Deletar branches diferente de main, staging e dev / develop
 function delete-branches () {
@@ -33,3 +33,5 @@ function delete-branches () {
     git branch -D "$i"
   done
 }
+
+export PATH=$HOME/.local/bin:$PATH
