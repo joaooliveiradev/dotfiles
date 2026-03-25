@@ -35,3 +35,5 @@ function delete-branches () {
 }
 
 export PATH=$HOME/.local/bin:$PATH
+
+export SSH_AUTH_SOCK=$HOME/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
