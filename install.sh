@@ -20,18 +20,19 @@ fi
 echo "You selected $selectedProfile"
 
 # -------------------- SHARED PACKAGES --------------------
-rm -r ~/.config/alacritty
+rm -rf ~/.config/alacritty
 ln -s "$dotfilesPath/shared/alacritty" ~/.config/alacritty
 
-rm -r ~/.zshrc
+rm -rf ~/.zshrc
 ln -s "$dotfilesPath/shared/zsh/.zshrc" ~/.zshrc
 
 # -------------------- MANJARO PACKAGES --------------------
 
 if [[ "$selectedProfile" == "manjaro" ]]; then
-    ln -s "$dotfilesPath/profiles/manjaro/rofi" ~/.config/rofi
     echo "Adding manjaro symbolic links"
+
     rm -rf ~/.config/rofi
+    ln -s "$dotfilesPath/profiles/manjaro/rofi" ~/.config/rofi
 
     rm -rf ~/.config/i3
     ln -s "$dotfilesPath/profiles/manjaro/i3" ~/.config/i3
@@ -44,6 +45,9 @@ if [[ "$selectedProfile" == "manjaro" ]]; then
 
     rm -rf ~/.config/Code/User/settings.json
     ln -s "$dotfilesPath/profiles/manjaro/vscode/settings.json" ~/.config/Code/User/settings.json
+
+    rm -rf ~/.config/wallpapers
+    ln -s "$dotfilesPath/shared/wallpapers" ~/.config/wallpapers
 fi
 
 # -------------------- ZORIN PACKAGES --------------------
@@ -61,16 +65,16 @@ fi
 clearAllLinks() {
     echo "Removing created symlinks..."
 
-    rm -f ~/.config/alacritty
-    rm -f ~/.zshrc
+    rm -rf ~/.config/alacritty
+    rm -rf ~/.zshrc
 
-    rm -f ~/.config/rofi
-    rm -f ~/.config/i3
-    rm -f ~/.config/polybar
-    rm -f ~/.config/picom
-    rm -f ~/.config/Code/User/settings.json
+    rm -rf ~/.config/rofi
+    rm -rf ~/.config/i3
+    rm -rf ~/.config/polybar
+    rm -rf ~/.config/picom
+    rm -rf ~/.config/Code/User/settings.json
 
-    rm -f ~/.config/zed
+    rm -rf ~/.config/zed
 }
 
 # Execute main function first
