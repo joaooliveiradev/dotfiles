@@ -1,0 +1,17 @@
+# Whitelist: ignore everything by default
+/*
+
+# Only what we want
+!.gitignore
+
+!settings.json
+
+!CLAUDE.md
+
+!skills/
+
+!hooks
+
+!agents/
+
+!commands/

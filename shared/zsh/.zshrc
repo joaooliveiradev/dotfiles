@@ -1,6 +1,13 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Start NVM
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source /usr/share/nvm/init-nvm.sh
+# Start ASDF
+. /home/joaooliveiradev/dev/asdf-vm/pkg/asdf-vm/opt/asdf-vm/asdf.sh
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -24,8 +31,8 @@ plugins=(
 [ -s "/home/joaooliveiradev/.bun/_bun" ] && source "/home/joaooliveiradev/.bun/_bun"
 
 # bun
-# export BUN_INSTALL="$HOME/.bun"
-# export PATH="$BUN_INSTALL/bin:$PATH"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Deletar branches diferente de main, staging e dev / develop
 function delete-branches () {

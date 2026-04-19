@@ -26,7 +26,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Wallpaper
-exec --no-startup-id feh --bg-scale ~/.config/wallpapers/wallpaper1.jpg
+exec --no-startup-id feh --bg-scale ~/.config/wallpapers/wallpaper4.png
 
 # Polybar
 exec --no-startup-id polybar
@@ -60,7 +60,7 @@ bindsym $mod+g exec brave
 bindsym $mod+Shift+w kill
 
 # start pcman file manager
-bindsym $mod+e exec pcmanfm
+bindsym $mod+e exec nautilus
 
 # start rofi (a program launcher)
 bindsym $mod+r exec --no-startup-id rofi -show drun
@@ -117,6 +117,7 @@ bindsym $mod+5 workspace number $ws5
 
 # Assignments
 assign [class="Code"] $ws1
+assign [class="dev.zed.Zed"] $ws1
 assign [class="Alacritty"] $ws2
 assign [class="Brave-browser"] $ws3
 assign [class="discord"] $ws4
@@ -147,7 +148,7 @@ floating_modifier $mod
 hide_edge_borders smart
 
 # Default border style
-for_window [class=".*"] border pixel 2 
+for_window [class=".*"] border pixel 2
 
 # Gaps size
 gaps inner 10
@@ -155,7 +156,7 @@ gaps outer 4
 
 # Giving focus to some applications and adding floating to others. // Find the class or instance typing 'xprop' on the terminal.
 for_window [class="Code"] focus, floating enable, resize set 1600 800, move position center
-for_window [class="Brave-browser" window_role="pop-up"] focus, floating enable, resize set 500 780 
+for_window [class="Brave-browser" window_role="pop-up"] focus, floating enable, resize set 500 780
 for_window [class="Brave-browser"] focus
 for_window [class="Alacritty"] focus, floating enable, resize set 1600 800, move position center
 

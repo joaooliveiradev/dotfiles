@@ -1,0 +1,180 @@
+{
+  // ===== VIM =====
+  "minimum_split_diff_width": 99.0,
+  "disable_ai": false,
+  "vim_mode": true,
+  "relative_line_numbers": "enabled",
+  "vim": {
+    "use_system_clipboard": "always",
+  },
+  // ===== EDITOR SETTINGS =====
+  "buffer_font_family": "SF Mono",
+  "buffer_font_size": 18,
+  "buffer_font_weight": 500,
+  "ui_font_family": "SF Mono",
+  "ui_font_weight": 500,
+  "ui_font_size": 16,
+  "tab_size": 2,
+  "icon_theme": {
+    "mode": "light",
+    "light": "Symbols Icon Theme",
+    "dark": "Symbols Icon Theme",
+  },
+  "theme": {
+    "mode": "dark",
+    "light": "poimandres",
+    "dark": "Catppuccin Mocha - No Italics",
+  },
+  // TOOLBAR
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false,
+  },
+  // TITLE BAR
+  "title_bar": {
+    "show_sign_in": false,
+    "show_project_items": false,
+    "show_branch_name": false,
+    "show_user_menu": false,
+    "show_branch_icon": false,
+    "show_user_picture": false,
+    "show_onboarding_banner": false,
+    "show_menus": false,
+  },
+  // ===== TABS ======
+  "tabs": {
+    "file_icons": true,
+    "git_status": true,
+  },
+  // ==== TAB BAR ====
+  "tab_bar": {
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": false,
+  },
+  // ==== STATUS BAR ====
+  "status_bar": {
+    "experimental.show": false,
+  },
+  // ===== INDENTATION =====
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+  },
+  // ===== FILE MANAGEMENT =====
+  "format_on_save": "on",
+  "ensure_final_newline_on_save": true,
+  "remove_trailing_whitespace_on_save": true,
+  // ===== TERMINAL =====
+  "terminal": {
+    "shell": {
+      "program": "zsh",
+    },
+    "font_family": "Menlo",
+    "font_size": 16,
+    "line_height": "comfortable",
+  },
+  // ===== GIT =====
+  "git": {
+    "inline_blame": {
+      "enabled": true,
+      "delay_ms": 600,
+    },
+  },
+  // ===== PERFORMANCE ======
+  // File scan exclusions, hide on the file explorer and search
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/out",
+    "**/dist",
+    "**/.husky",
+    "**/.turbo",
+    "**/.next",
+    "**/.storybook",
+    "**/build",
+    "**/report",
+    "**/node_modules",
+  ],
+  // ===== LSP & INTELLISENSE =====
+  "inlay_hints": {
+    "enabled": false,
+  },
+  "prettier": {
+    "allowed": false
+  },
+  // ===== PROJECT & FILES =====
+  "project_panel": {
+    "dock": "right",
+    "hide_root": true,
+    "auto_fold_dirs": false,
+    "default_width": 300
+  },
+  // ===== AGENT =====
+  "agent": {
+    "dock": "left",
+    "default_width": 100,
+  },
+  "edit_predictions": {
+    "provider": "copilot",
+  },
+  // ===== TELEMETRY =====
+  "telemetry": {
+    "diagnostics": false, // Send crash reports
+    "metrics": false, // Send usage statistics
+  },
+  // ===== LANGUAGE-SPECIFIC =====
+  "languages": {
+    "JavaScript": {
+      "tab_size": 2,
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true,
+      },
+    },
+    "TypeScript": {
+      "tab_size": 2,
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true,
+      },
+      "show_whitespaces": "all",
+      "hard_tabs": true,
+      "inlay_hints": {
+        "enabled": true,
+        "show_parameter_hints": false,
+        "show_other_hints": true,
+        "show_type_hints": true,
+      },
+    },
+    "TSX": {
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      }
+    },
+    "JSON": {
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      }
+    },
+    "CSS": {
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      }
+    },
+  },
+}
