@@ -1,12 +1,14 @@
 # Craft — Specify
 
-**Goal**: Read `.specs/features/[slug]/research.md` and transform it into a formal, testable PRD at `.specs/features/[slug]/spec.md`. Specify is a translator, not an interviewer — **no clarifying questions are asked**.
+**Goal**: Read `.specs/features/[slug]/research.md` and transform it into a formal, testable PRD at `.specs/features/[slug]/spec.md`.
+
+**Invoked by**: `references/spec.md`. Receives a resolved `[slug]` and an existing `research.md`.
 
 ## Process
 
 ### 1. Load research.md
 
-Load `.specs/features/[slug]/research.md` in full. It is the only input source. If it doesn't exist, stop and ask the user to run Research first (`Start feature [slug]`).
+Load `.specs/features/[slug]/research.md` in full. It is the only input source.
 
 ### 2. Transform — research → spec
 
@@ -26,22 +28,19 @@ Each research field maps to a spec section:
 
 **Atomization rule**: a single scenario in research can become multiple WHEN/THEN clauses in spec — split until each clause is independently testable. Cover happy path, the edge from research, and any obvious validation/error response that follows from the scenario. Each clause gets its own ID (`[FEAT]-[STORY].[CLAUSE]`) so tasks can claim individual clauses, not whole stories.
 
-**Vagueness rule**: if a scenario or capability is too vague to atomize, do **not** ask the user. Insert `⚠️ VAGUE: [what's unclear]` inline where the gap lives, and surface every flag at the top of the spec when presenting it. The user catches them at sign-off and bounces back to Research if needed.
+**Vagueness rule**: if a scenario or capability is too vague to atomize, do **not** ask the user. Insert `⚠️ VAGUE: [what's unclear]` inline where the gap lives, and surface every flag at the top of the spec so the wrapper can present them at sign-off.
 
 ### 3. Assign IDs and build traceability
 
 Generate `[CATEGORY]-[NUMBER]` IDs for every requirement (e.g., `AUTH-01`, `CART-03`, `NOTIF-02`). Build the traceability table linking IDs → stories → status. Status starts as `Pending`.
 
-### 4. Present for sign-off
+### 4. Write spec.md
 
-Show the user the completed `spec.md` plus a summary of any `⚠️ VAGUE` flags. Two outcomes:
-
-- **Approved** → trigger Plan with `Start plan [slug]`.
-- **Rejected** → bounce back to Research with the specific gaps. Do not iterate inside Specify.
+Write `.specs/features/[slug]/spec.md` using the template below. Surface the `⚠️ VAGUE` flag list at the top so the wrapper can present them at sign-off.
 
 ## Rules
 
-- **Never ask the user clarifying questions.** Research is the contract. Missing → flag, then bounce.
+- **Never ask the user clarifying questions.** Research is the contract. Missing → flag with `⚠️ VAGUE`. The wrapper handles bounce-back if the user rejects.
 - Every P1 story must be independently testable.
 - Requirement IDs are mandatory.
 - Do not describe HOW to build — that's Plan's job.
@@ -177,4 +176,3 @@ How we know the feature is successful (carried over from Success Signals in rese
 - **Requirement IDs are mandatory** — Every story maps to trackable IDs
 - **Edge cases matter** — What breaks? What's empty? What's huge?
 - **Out of Scope prevents creep** — If it's not here, it doesn't get built
-- **No clarification loop** — vagueness is flagged inline and surfaced at sign-off, never resolved by re-asking the user

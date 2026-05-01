@@ -2,13 +2,25 @@
 
 **Goal**: Implement ONE task at a time. Surgical changes. Verify. Commit. Repeat.
 
-This is where code gets written. Every task follows the same cycle: research -> specify -> plan → tasks -> implement → review.
+This is where code gets written. Every task follows the same cycle: pick → state plan → RED → GREEN → verify → commit.
+
+---
+
+## Resolve the slug
+
+Read `.specs/project/STATE.md` → `Current Feature`. That is the active slug.
+
+- If it is `none` or missing → **stop** and tell the user:
+  > "No active feature found. Run `/craft feature` first."
+- Print the resolved slug on every invocation so the user sees what's active.
+
+Then read `.specs/features/[slug]/tasks.md` to drive the rest of this skill.
 
 ---
 
 ## MANDATORY: Before Starting Any Implementation
 
-**Read [coding-principles.md](coding-principles.md) and state:**
+**Read [coding-principles.md](../helpers/coding-principles.md) and state:**
 
 1. **Assumptions** - What am I assuming? Any uncertainty?
 2. **Files to touch** - List ONLY files this task requires
@@ -79,7 +91,7 @@ Write the minimum implementation needed to satisfy the task's success criteria: 
 If a test is genuinely wrong (tests the wrong behavior per spec), STOP and ask the user
 before modifying it. Never silently change a test.
 
-Follow [coding-principles.md](coding-principles.md):
+Follow [coding-principles.md](../helpers/coding-principles.md):
 
 - Simplest code that works
 - Touch ONLY listed files
@@ -124,6 +136,14 @@ After the gate check passes:
 ### 7. Atomic Git Commit
 
 Each task gets its own commit immediately after verification. Never batch multiple tasks into one commit.
+
+⚠️ **Commit author — INVIOLABLE.**
+
+- Every commit produced by this skill MUST use the git author already configured in the local git environment where the user invoked Craft (whatever `git config user.name` / `git config user.email` resolves to in that working directory).
+- **NEVER** override the author. Do not pass `--author=...`, do not set `GIT_AUTHOR_*` / `GIT_COMMITTER_*` environment variables, do not edit `.git/config`.
+- **NEVER** attribute commits to Claude in any field. No `Co-Authored-By: Claude ...` trailer. No Claude in the author field. No Claude in the committer field. No `🤖 Generated with Claude` footer.
+- **NEVER** use `--no-verify`, `--no-gpg-sign`, or any flag that bypasses the user's local hooks/signing configuration.
+- The commit looks exactly like the user wrote it themselves — because, as far as git history is concerned, they did.
 
 **Format ([Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/)):**
 

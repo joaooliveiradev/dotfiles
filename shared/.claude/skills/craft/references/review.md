@@ -2,6 +2,20 @@
 
 **Goal**: Verify implementation meets spec AND coding principles. This is NOT a separate phase — verification is part of every task's completion within Execute.
 
+---
+
+## Resolve the slug
+
+Read `.specs/project/STATE.md` → `Current Feature`. That is the active slug.
+
+- If it is `none` or missing → **stop** and tell the user:
+  > "No active feature found. Run `/craft feature` first."
+- Print the resolved slug on every invocation so the user sees what's active.
+
+Then read `.specs/features/[slug]/spec.md`, `plan.md`, `tasks.md` to drive the rest of this skill.
+
+---
+
 **Two levels of verification:**
 
 1. **Per-task verification (always):** After implementing each task, verify its "Done when" criteria before committing. This is mandatory and automatic.
@@ -65,7 +79,7 @@ If TESTING.md does not exist (greenfield project), use the gate command agreed u
 
 ### 5. Code Quality Check (MANDATORY)
 
-For each changed file, verify against [coding-principles.md](coding-principles.md):
+For each changed file, verify against [coding-principles.md](../helpers/coding-principles.md):
 
 | Check                                | Pass? |
 | ------------------------------------ | ----- |
@@ -135,7 +149,7 @@ Fix tasks follow the same format as regular tasks and can be executed with the i
 # [Feature] Validation
 
 **Date**: [YYYY-MM-DD]
-**Spec**: `.specs/features/[feature]/spec.md`
+**Spec**: `.specs/features/[slug]/spec.md`
 
 ---
 

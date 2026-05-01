@@ -1,8 +1,8 @@
 # Tasks
 
-**Goal**: Break into GRANULAR, ATOMIC tasks. Clear dependencies. Right tools. Parallel execution plan.
+**Goal**: Break the plan into GRANULAR, ATOMIC tasks. Clear dependencies. Right tools. Parallel execution plan. Produce `.specs/features/[slug]/tasks.md`. Reads `plan.md`, `spec.md`, and `.specs/codebase/TESTING.md`.
 
-Produce `.specs/features/[slug]/tasks.md`. Reads `spec.md`, `design.md`, and `.specs/codebase/TESTING.md`.
+**Invoked by**: `references/issues.md`. Receives a resolved `[slug]` and an existing `plan.md` + `spec.md`.
 
 ## Why Granular Tasks?
 
@@ -37,9 +37,9 @@ Produce `.specs/features/[slug]/tasks.md`. Reads `spec.md`, `design.md`, and `.s
 
 ## Process
 
-### 1. Review Design
+### 1. Review Plan
 
-Read `.specs/[feature]/design.md` before creating tasks.
+Read `.specs/features/[slug]/plan.md` before creating tasks.
 
 ### 1.5. Load Test Coverage Matrix
 
@@ -82,7 +82,7 @@ Group tasks into phases. Identify what can run in parallel.
 
 ### 5. Validate Before Presenting (MANDATORY)
 
-Before showing tasks to the user, run ALL four pre-approval checks. These are NOT optional — they are gates. If any check fails, restructure the tasks and re-run until all pass.
+Before returning tasks to the wrapper, run ALL four pre-approval checks. These are NOT optional — they are gates. If any check fails, restructure the tasks and re-run until all pass.
 
 **Check 1: Task Granularity** — verify each task is atomic (see Granularity Check section).
 
@@ -92,26 +92,20 @@ Before showing tasks to the user, run ALL four pre-approval checks. These are NO
 
 **Check 4: Requirement Coverage** — verify every clause ID in `spec.md`'s traceability table is referenced by at least one task's `Requirement` field (see Requirement Coverage section). Build the coverage table and include it in the output.
 
-**Output all tables with the tasks** so the user can see the validation results. Any ❌ means you MUST restructure before presenting — do not show failing tasks to the user and ask them to approve.
+**Return all four tables alongside `tasks.md`** so the wrapper can present validation results at sign-off. Any ❌ means you MUST restructure before returning — never hand the wrapper failing tasks to present.
 
-### 6. Trigger the next step
+### 6. Write tasks.md
 
-The next step in our workflow is implement.
-
-1. Tell the user the tasks are ready. Show all four validation tables.
-2. Wait for explicit user input. Two outcomes:
-   - **Approved** → trigger Implement with `Start implement [slug]`.
-   - **Rejected** → restructure the failing tasks based on the user's feedback. Do not iterate inside Implement.
-3. The user types the trigger — the agent never auto-triggers Implement.
+Write `.specs/features/[slug]/tasks.md` along with all four validation tables.
 
 ---
 
-## Template: `.specs/[feature]/tasks.md`
+## Template: `.specs/features/[slug]/tasks.md`
 
 ```markdown
 # [Feature] Tasks
 
-**Design**: `.specs/[feature]/design.md`
+**Plan**: `.specs/features/[slug]/plan.md`
 **Status**: Draft | Approved | In Progress | Done
 
 ---
@@ -166,7 +160,7 @@ T8 → T9
 
 **Done when**:
 
-- [ ] Interface defined with all methods from design
+- [ ] Interface defined with all methods from plan
 - [ ] Types exported correctly
 - [ ] No TypeScript errors
 
@@ -190,7 +184,7 @@ T8 → T9
 **Done when**:
 
 - [ ] Implements interface from T1
-- [ ] Handles error cases from design
+- [ ] Handles error cases from plan
 - [ ] Gate check passes: `[quick gate command from TESTING.md]`
 - [ ] Test count: [N] tests pass (no silent deletions)
 

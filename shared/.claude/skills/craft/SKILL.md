@@ -1,6 +1,7 @@
 ---
 name: craft
-description: Spec-driven development workflow with six phases — Research, Specify, Plan, Tasks, Implement, Review — plus a Quick-mode escape hatch. Feature Mode runs the full pipeline; Quick mode, one-sentence tasks. Stack-agnostic. Creates atomic tasks with verification criteria, atomic git commits, requirement traceability, and persistent memory across sessions. Use when (1) starting new projects, (2) working in existing codebases, (3) planning features, (4) implementing with verification and atomic commits, (5) quick ad-hoc tasks (bug fixes, config changes), (6) tracking decisions/blockers/deferred ideas across sessions, (7) pausing/resuming work. Triggers on "initialize project", "start project", "setup craft", "research", "specify", "plan", "tasks", "implement", "review", "validate", "UAT", "quick fix", "quick task", "pause work", "resume work".
+description: Spec-driven development workflow with two ways to develop features, feature mode and quick mode. Feature Mode runs the full pipeline (Spec → Issues → Implement → Review); Spec wraps research + specify, Issues wraps plan + tasks. Quick mode just describe and implement.
+Stack-agnostic. Creates atomic tasks with verification criteria, atomic git commits, requirement traceability, and persistent memory across sessions.
 metadata:
   author: João Victor
   version: 2.0.0
@@ -17,22 +18,28 @@ metadata:
 Plan and implement projects with precision. Granular tasks. Clear dependencies. Right tools. Zero ceremony.
 
 ```
-┌──────────┐   ┌──────────┐   ┌────────┐   ┌─────────┐   ┌────────────┐   ┌─────────┐
-│ RESEARCH │ → │ SPECIFY  │ → │  PLAN  │ → │  TASKS  │ → │ IMPLEMENT  │ → │ REVIEW  │
-└──────────┘   └──────────┘   └────────┘   └─────────┘   └────────────┘   └─────────┘
+┌────────┐   ┌────────┐   ┌────────────┐   ┌─────────┐
+│  SPEC  │ → │ ISSUES │ → │ IMPLEMENT  │ → │ REVIEW  │
+└────────┘   └────────┘   └────────────┘   └─────────┘
 
 * Feature Mode: full pipeline, all phases required.
 * Quick Mode: Describe → Implement
 ```
 
+Each wrapper bundles two related sub-steps with internal checkpoints:
+- **Spec** wraps Research (grilling) + Specify (PRD generation).
+- **Issues** wraps Plan (architecture) + Tasks (atomic breakdown).
+
 ## Rules
 
-Each phase reads the artifact of the phase before it and produces the artifact the next phase will read. The chain is what makes the workflow work.
+Each phase reads the artifacts of the phase before it and produces the artifacts the next phase will read. The chain is what makes the workflow work.
 
-- **Research** — grills the user (via `/grill-me`) to capture vision, capabilities (P1/P2/P3), scenarios (WHEN/THEN + edges), success signals, decisions, constraints, references, and out-of-scope → `research.md`.
-- **Specify** — reads `research.md` and transforms it into the formal PRD without asking the user any clarifying questions: user stories (P1/P2/P3), WHEN/THEN/SHALL acceptance criteria, edge cases, NFRs, and traceable requirement IDs. Vagueness is flagged inline for the user to catch at sign-off → `spec.md`.
-- **Plan** — reads `spec.md` (and `CONCERNS.md` if the codebase has one) to decide HOW: architecture, components and interfaces, code-reuse analysis, data models, error handling → `plan.md`.
-- **Tasks** — reads `plan.md`, `spec.md`, and `TESTING.md` (coverage matrix + parallelism + gate commands) to break the work into atomic tasks (What, Where, Depends on, Reuses, Done when, Tests, Gate, Commit) with a parallel-execution plan → `tasks.md`.
+- **Spec** — runs Research then Specify in one phase, with an internal checkpoint between them.
+  - *Research*: grills the user (via `/grill-me`) to capture vision, capabilities (P1/P2/P3), scenarios (WHEN/THEN + edges), success signals, decisions, constraints, references, and out-of-scope → `research.md`.
+  - *Specify*: reads `research.md` and transforms it into the formal PRD without asking the user any clarifying questions: user stories (P1/P2/P3), WHEN/THEN/SHALL acceptance criteria, edge cases, NFRs, and traceable requirement IDs. Vagueness is flagged inline for the user to catch at sign-off → `spec.md`.
+- **Issues** — runs Plan then Tasks in one phase, with an internal checkpoint between them.
+  - *Plan*: reads `spec.md` (and `CONCERNS.md` if the codebase has one) to decide HOW: architecture, components and interfaces, code-reuse analysis, data models, error handling → `plan.md`.
+  - *Tasks*: reads `plan.md`, `spec.md`, and `TESTING.md` (coverage matrix + parallelism + gate commands) to break the work into atomic tasks (What, Where, Depends on, Reuses, Done when, Tests, Gate, Commit) with a parallel-execution plan → `tasks.md`.
 - **Implement** — reads `tasks.md` and executes one task at a time via sub-agents. Each task: RED (write tests from `Done when`) → GREEN (minimum code) → gate check → atomic commit. The main agent never writes production code — it only coordinates, updates `tasks.md` status, and closes requirement IDs in `spec.md`.
 - **Review** — reads `spec.md`, `plan.md`, `tasks.md`, and the implemented code. Runs the Build-level gate, validates each WHEN/THEN criterion against the code, audits code quality, and (for user-facing features) runs interactive UAT → `review.md`. Updates requirement traceability in `spec.md`.
 
@@ -51,14 +58,14 @@ Each phase reads the artifact of the phase before it and produces the artifact t
 │   ├── INTEGRATIONS.md
 │   └── CONCERNS.md
 ├── features/
-│   └── [feature]/
+│   └── [slug]/
 │       ├── research.md
 │       ├── spec.md # Requirements with traceable IDs
 │       ├── plan.md
 │       ├── tasks.md # Atomic tasks with verification (only for Large/Complex)
 │       └── review.md
 ├── quick  # Ad-hoc tasks (quick mode)
-│   └── NNN-slug/
+│   └── [slug]/
 │       ├── TASK.md
 │       └── SUMMARY.md
 └── HANDOFF.md          # Session checkpoint
@@ -66,30 +73,29 @@ Each phase reads the artifact of the phase before it and produces the artifact t
 
 ## Workflow
 
-**New project:**
+**Once per project — `Start project`:**
 
-1. Start project, Init project, Start new project -> PROJECT.MD, STATE.MD and scaffold `.specs/`
-2. For each feature → Feature Mode.
+- New project → scaffold `.specs/`, write `PROJECT.md`. No codebase-map, no `TESTING.md`. `STATE.md` is created later by `Start feature`.
+- Existing codebase → scaffold `.specs/`, write `PROJECT.md`, then run `codebase-map` to derive the 7 brownfield docs (including `TESTING.md`).
 
-**Existing codebase:**
+**Per feature — `Start feature` first, always:**
 
-1. Map codebase → 7 brownfield docs.
-2. Start project, Init project, Start new project -> PROJECT.MD, STATE.MD, scaffold `.specs/`.
-3. For each feature → Feature Mode.
+`Start feature` is the only place that asks for a slug. It asks "spec or quick mode?", asks for the slug, creates `STATE.md` (if missing) with the slug as `Current Feature`, creates the feature folder (`.specs/features/[slug]/` or `.specs/quick/[slug]/`), and creates the git branch. Every downstream phase reads the slug from `STATE.md` — no other skill ever asks for it.
 
-**Feature Mode:**
+**Feature Mode (after `Start feature` with mode = spec):**
 
 Feature mode is the default workflow to create new features in this craft workflow.
 
-- To start this workflow, say "Start feature [slug]" or "Init feature [slug]" to trigger the first phase of the feature workflow.
-- Each phase produces an artifact in `.specs/features/[slug]/` that the next phase reads.
-- Each phase cannot be skipped - the chain is what makes the workflow work. The user confirms each artifact before the next phase runs.
-- The main agent orchestrates the workflow, but delegates implementation tasks to sub-agents to keep the main context lean and enable parallel execution. - The main agent never writes production code, every task is delegated to a sub-agent.
+- Trigger the Spec phase with `Start spec`. The slug comes from `STATE.md`.
+- Each phase produces artifacts in `.specs/features/[slug]/` that the next phase reads.
+- Each phase cannot be skipped — the chain is what makes the workflow work. The user confirms the final artifact at the end of each phase, then chooses whether to proceed to the next phase.
+- The main agent orchestrates the workflow, but delegates implementation tasks to sub-agents to keep the main context lean and enable parallel execution. The main agent never writes production code — every task is delegated to a sub-agent.
 
-Research → Specify → Plan → Tasks → Implement → Review
+Spec → Issues → Implement → Review
 
-**Quick mode**
-Quick mode is design for small tasks that don't require research, specification or planning. It skips straight to implementation with a description.
+**Quick mode (after `Start feature` with mode = quick):**
+
+Quick mode is designed for small tasks that don't require research, specification or planning. It skips straight to implementation with a description.
 
 Describe → Pre-implementation check → Implement → Verify -> Track in STATE.md
 
@@ -108,7 +114,7 @@ Describe → Pre-implementation check → Implement → Verify -> Track in STATE
 - research.md (when specifying)
 - spec.md (when working on specific feature)
 - context.md (when designing or implementing from user decisions)
-- design.md (when implementing from design)
+- plan.md (when implementing from plan)
 - tasks.md (when executing tasks)
 
 **Never load simultaneously:**
@@ -119,7 +125,7 @@ Describe → Pre-implementation check → Implement → Verify -> Track in STATE
 
 **Target:** <40k tokens total.
 **Reserve:** 160k+ tokens for work, reasoning, outputs.
-**Monitoring:** display status when >40k (see [context-limits.md](references/context-limits.md)).
+**Monitoring:** display status when >40k (see [context-limits.md](helpers/context-limits.md)).
 
 ## Sub-Agent Delegation
 
@@ -161,21 +167,17 @@ The orchestrating agent uses this to update `tasks.md` status, traceability in `
 
 ## Commands
 
-| Trigger Pattern                                                        | Reference                                                |
-| ---------------------------------------------------------------------- | -------------------------------------------------------- |
-| Start Project, Init project, Start new project                         | [start.md](references/start.md)                          |
-| Start codebase map, Start mapping codebase                             | [brownfield-mapping.md](references/brownfield-mapping.md)|
-| Start feature [slug], Init feature [slug]                              | [research.md](references/research.md)                    |
-| Start specify [slug], Start write PRD [slug]                           | [specify.md](references/specify.md)                      |
-| Start plan [slug], Init plan [slug]                                    | [plan.md](references/plan.md)                            |
-| Start tasks [slug], create tasks                                       | [tasks.md](references/tasks.md)                          |
-| Start implement [slug], init implement                                 | [implement.md](references/implement.md)                  |
-| Start quick mode                                                       | [quick.md](references/quick.md)                          |
-| Record decision, log blocker, add todo                                 | [state-management.md](references/state-management.md)    |
-| Pause work, end session, create handoff                                | [handoff.md](references/handoff.md)                      |
-| Resume work, continue, load handoff                                    | [handoff.md](references/handoff.md)                      |
-| Research feature, grill me on a feature                                | [research.md](references/research.md)                    |
-| Review, validate, UAT, walk me through it                              | [review.md](references/review.md)                        |
+| Trigger Pattern                                                                         | Reference                                                 |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| Start project                                                                           | [start.md](references/start.md)                           |
+| Start feature                                                                           | [feature.md](references/feature.md)                       |
+| Start spec                                                                              | [spec.md](references/spec.md)                             |
+| Start issues                                                                            | [issues.md](references/issues.md)                         |
+| Start implement                                                                         | [implement.md](references/implement.md)                   |
+| Start quick mode                                                                        | [quick-mode.md](references/quick-mode.md)                 |
+| Record decision, log blocker, add todo                                                  | [state-management.md](helpers/state-management.md)        |
+| Pause work, end session, create handoff, resume work, continue, load handoff            | [handoff.md](helpers/handoff.md)                          |
+| Review, validate, UAT, walk me through it                                               | [review.md](references/review.md)                         |
 
 ---
 
@@ -190,7 +192,6 @@ When the workflow requires a diagram (architecture overviews, flows, component d
 ### Code Exploration → codenavi
 
 When the workflow requires code exploration (codebase research during planning, file references during implementation), check if `codenavi` is installed. If yes, delegate all code exploration to it.
-
 
 ## Knowledge Verification Chain
 
@@ -208,8 +209,9 @@ Step 5: Flag uncertain → "I'm not certain about X — here's my reasoning, but
 
 - Never skip to Step 5 if Steps 1–4 are available.
 - Step 5 is ALWAYS flagged as uncertain — never presented as fact.
+
 **NEVER assume or fabricate.** If you cannot find an answer, say "I don't know" or "I couldn't find documentation for this". Inventing APIs, patterns, or behaviors causes cascading failures across design → tasks → implementation. Uncertainty is always preferable to fabrication.
 
 ## Code Analysis
 
-Use available tools with graceful degradation. See [code-analysis.md](references/code-analysis.md).
+Use available tools with graceful degradation. See [code-analysis.md](helpers/code-analysis.md).

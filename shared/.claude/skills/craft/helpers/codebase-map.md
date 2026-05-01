@@ -1,8 +1,8 @@
-# Brownfield Mapping
+# Codebase map
 
-**Trigger:** "Map codebase", "Analyze existing code", "Document current architecture"
+**Invoked by:** `references/start.md` (existing-codebase branch only). **Not a user-facing trigger** — the user reaches this helper through `Start project`, never directly.
 
-**Purpose:** Understand existing project structure before adding features.
+**Goal:** Understand existing project structure before adding features.
 
 ## Process
 

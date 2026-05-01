@@ -1,55 +1,47 @@
 # Craft — Plan
 
-**Goal**
-Define HOW to build it. Architecture, components, what to reuse and produce the `.specs/features/[slug]/plan.md` document.
-To make this plan document, reads `spec.md` (required) to have context.
+**Goal**: Define HOW to build the feature — architecture, components, what to reuse, data models, error handling — and produce `.specs/features/[slug]/plan.md`.
+
+**Invoked by**: `references/issues.md`. Receives a resolved `[slug]` and an existing `spec.md`.
 
 ## Process
 
 ### 1. Load context
-  Load `.specs/features/[slug].spec.md` before planning it. If `.specs/features/[feature]/context.md` exists, load it too — it contains implementation decisions that constrain the plan (layout choices, behavior preferences, interaction patterns). Decisions marked as "Agent's Discretion" are yours to decide.
 
-  This `spec.md` file need exist. if doesn't, stop and ask the user to run Specify.
-  To run Specify is: `Start specify [slug]`
+Load `.specs/features/[slug]/spec.md` before planning. If `.specs/features/[slug]/context.md` exists, load it too — it contains implementation decisions that constrain the plan (layout choices, behavior preferences, interaction patterns). Decisions marked as "Agent's Discretion" are yours to decide.
 
-  **CRITICAL: NEVER assume or fabricate information.** If you cannot find an answer through the chain, explicitly say "I don't know" or "I couldn't find documentation for this". Inventing an API, a pattern, or a behavior that doesn't exist is far worse than admitting uncertainty. Wrong assumptions propagate through plan → tasks → implementation and cause cascading failures.
+**CRITICAL: NEVER assume or fabricate information.** If you cannot find an answer through the knowledge verification chain, explicitly say "I don't know" or "I couldn't find documentation for this". Inventing an API, a pattern, or a behavior that doesn't exist is far worse than admitting uncertainty. Wrong assumptions propagate through plan → tasks → implementation and cause cascading failures.
 
 ### 2. Define Architecture
 
-  Overview of how components interact. Use mermaid diagrams when helpful. Before creating any diagrams, check if the `mermaid-studio` skill is available (see Skill Integrations in SKILL.md).
+Overview of how components interact. Use mermaid diagrams when helpful. Before creating any diagrams, check if the `mermaid-studio` skill is available (see Skill Integrations in SKILL.md).
 
 ### 3. Identify Code Reuse
 
-  **CRITICAL**: What existing code can we leverage? This saves tokens and reduces errors.
+**CRITICAL**: What existing code can we leverage? This saves tokens and reduces errors.
 
-  If `.specs/codebase/CONCERNS.md` exists, check it before planning. Any component flagged as fragile, carrying tech debt, or having test coverage gaps requires extra care in the plan document
+If `.specs/codebase/CONCERNS.md` exists, check it before planning. Any component flagged as fragile, carrying tech debt, or having test coverage gaps requires extra care in the plan document.
 
 ### 4. Define Components and Interfaces
 
-  Each component: Purpose, Location, Interfaces, Dependencies, What it reuses.
+Each component: Purpose, Location, Interfaces, Dependencies, What it reuses.
 
 ### 5. Define Data Models
 
-  If the feature involves data, define models before implementation.
+If the feature involves data, define models before implementation.
 
-### 6. Trigger the next step
+### 6. Write plan.md
 
-The next step in our workflow is tasks.
-
-1. Tell the user the plan is ready. Show the completed `plan.md`.
-2. Wait for explicit user input. Two outcomes:
-   - **Approved** → trigger Tasks with `Start tasks [slug]`.
-   - **Rejected** → restructure the plan document based on the user's feedback. Do not iterate inside Tasks.
-3. The user types the trigger — the agent never auto-triggers Tasks.
+Write `.specs/features/[slug]/plan.md` using the template below.
 
 ---
 
-## Template: `.specs/[feature]/plan.md`
+## Template: `.specs/features/[slug]/plan.md`
 
 ````markdown
 # [Feature] Plan
 
-**Spec**: `.specs/[feature]/spec.md`
+**Spec**: `.specs/features/[slug]/spec.md`
 **Status**: Draft | Approved
 
 ---
@@ -156,10 +148,9 @@ interface AnotherModel {
 
 ## Tips
 
-- **Load context first** — Reads spec.md and context.md to have fully understading what to build
+- **Load context first** — Reads spec.md and context.md to fully understand what to build
 - **Reuse is king** — Every component should reference existing patterns
 - **Interfaces first** — Define contracts before implementation
 - **Keep it visual** — Diagrams save 1000 words (check mermaid-studio skill in Skill Integrations)
 - **Small components** — If component does 3+ things, split it
 - **Check CONCERNS.md** — If it exists, flag fragile areas the plan must address
-- **Confirm before Tasks** — User approves plan before breaking into tasks

@@ -2,7 +2,23 @@
 
 **Goal:** Execute small, ad-hoc tasks with the same quality principles but without full pipeline ceremony.
 
-**Trigger:** "Quick fix", "Quick task", "Small change", "Bug fix", "Just do X"
+**Trigger:** "Start quick mode", "Quick fix", "Quick task", "Small change"
+
+**Prerequisite:** `/craft feature` has already been run with mode = `quick`. The slug, the folder `.specs/quick/[slug]/`, and the git branch already exist.
+
+---
+
+## Resolve the slug
+
+Read `.specs/project/STATE.md` → `Current Feature`. That is the active slug.
+
+- If it is `none` or missing → **stop** and tell the user:
+  > "No active feature found. Run `/craft feature` first."
+- Print the resolved slug on every invocation so the user sees what's active.
+
+Verify `.specs/quick/[slug]/` exists. If it doesn't, stop and tell the user to run `/craft feature` (quick mode) first.
+
+---
 
 ## When to Use
 
@@ -41,7 +57,7 @@ Get user approval before proceeding. If the pre-implementation check reveals the
 
 ### 3. Implement
 
-Follow [coding-principles.md](coding-principles.md):
+Follow [coding-principles.md](../helpers/coding-principles.md):
 
 - Simplest code that works
 - Touch ONLY listed files
@@ -80,7 +96,7 @@ Quick tasks live separately from planned features:
 ```
 .specs/
 └── quick/
-    └── NNN-slug/
+    └── [slug]/
         ├── TASK.md       # Description + verification
         └── SUMMARY.md    # What was done + commit
 ```
@@ -88,7 +104,7 @@ Quick tasks live separately from planned features:
 **TASK.md template:**
 
 ```markdown
-# Quick Task NNN: [Title]
+# Quick Task [slug]: [Title]
 
 **Date:** [date]
 **Status:** Done | In Progress | Blocked

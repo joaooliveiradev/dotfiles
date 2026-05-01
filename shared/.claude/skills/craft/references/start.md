@@ -1,62 +1,56 @@
-# Project start
+# Start
 
-**Trigger:** "Start project", "Init project", "Start new project"
+**Trigger:** "Start project"
 
-## Purpose
-Create the foundational structure for using the craft workflow. This includes setting up the `.specs/` directory, ensuring it's ignored by git and scaffolding the initial project documentation (PROJECT.md, STATE.MD)
+## Goal
+One-time setup for using the craft workflow in a project. Scaffolds the `.specs/` tree, makes sure it's gitignored, interviews the user to produce `PROJECT.md`, and — for existing codebases — runs `codebase-map` to derive the brownfield docs (including `TESTING.md`).
+
+This skill is run **once per project**.
 
 ## What this command does
 
-1. Creates `.specs/`, `.specs/project/`, `.specs/features/`, `.specs/codebase/`.
-2. Ensures `.specs/` is listed in the project's `.gitignore`.
-3. Scaffolds `.specs/project/STATE.md` (minimal — only `Current Feature` is actively used in v1).
+1. Asks the user: *"Is this a new project or an existing codebase?"*
+2. Creates `.specs/`, `.specs/project/`, `.specs/features/`, and (existing only) `.specs/codebase/`.
+3. Ensures `.specs/` is listed in the project's `.gitignore`.
 4. Interviews the user to produce `.specs/project/PROJECT.md`.
-5. Interviews the user to produce `.specs/codebase/TESTING.md`.
+5. **Existing codebase only:** invokes `helpers/codebase-map.md` to generate the 7 brownfield docs (`STACK.md`, `ARCHITECTURE.md`, `CONVENTIONS.md`, `STRUCTURE.md`, `TESTING.md`, `INTEGRATIONS.md`, `CONCERNS.md`).
+6. **New project:** skips codebase-map.
 
-## Orchestration
+## Process
 
-1. **Check state.** If `.specs/` already exists, ask whether to continue (e.g., regenerate PROJECT.md or TESTING.md) or abort. Never overwrite an existing PROJECT.md, STATE.md, or TESTING.md without explicit confirmation.
+1. **Check state.** If `.specs/` already exists, ask whether to continue (regenerate PROJECT.md, re-run codebase-map) or abort. Never overwrite an existing `PROJECT.md` or any `.specs/codebase/*.md` file without explicit confirmation.
 2. **Confirm git repo.** If `git rev-parse --git-dir` fails, warn the user before creating a `.gitignore`.
-3. **Create folders**: `mkdir -p .specs/project .specs/features .specs/codebase`.
-4. **Update `.gitignore`**:
+3. **Ask: new project or existing codebase?** Branch on the answer.
+4. **Create folders:**
+   - New project → `mkdir -p .specs/project .specs/features`
+   - Existing codebase → `mkdir -p .specs/project .specs/features .specs/codebase`
+5. **Update `.gitignore`:**
    - If no `.gitignore` exists, create one with `.specs/`.
    - If `.gitignore` exists and already lists `.specs/` or `.specs`, do nothing.
    - Otherwise append under a `# Craft workflow` comment block.
-5. **Scaffold STATE.md** at `.specs/project/STATE.md` using the STATE template below. Do not populate anything beyond headings; the file is structural scaffolding. `Current Feature` starts as `none`.
 6. **Run the PROJECT.md interview** (see below). Write `.specs/project/PROJECT.md` when done.
-7. **Run the TESTING.md interview** (see below). Write `.specs/codebase/TESTING.md` when done.
-8. **Confirm and point to next step**: suggest `/craft-research <feature-slug>` to begin the first feature.
+7. **If existing codebase → invoke `helpers/codebase-map.md`.** That helper produces all 7 brownfield docs, including `TESTING.md`, derived from the actual code. Do not interview the user for `TESTING.md` — it is always derived from `codebase-map` output.
+8. **Confirm and point to next step:** suggest `/craft feature` to begin the first feature.
 
 ## Rules
 
 - Never overwrite an existing file in `.specs/` without explicit user confirmation.
 - Never make git commits — this skill only creates files and edits `.gitignore`.
 - If not in a git repo, ask before creating `.gitignore`.
-- Keep interviews conversational; no more than 5 questions per turn.
-- Do not invent facts. If the user doesn't know, put it in Open Questions (PROJECT.md) or leave a TODO marker (TESTING.md).
+- Keep the PROJECT.md interview conversational; no more than 5 questions per turn, use the essential question below to see what to ask.
+- Do not invent facts. If the user doesn't know, put it in Open Questions (PROJECT.md).
 
+Extract project vision via iterative Q&A (max 3-5 questions per message):
 
+**Essential questions:**
 
-```markdown
-# STATE
+1. What are you building?
+2. Who is it for and what problem does it solve?
+3. What tech stack are you using? (if known)
+4. What's in scope for v1? What's explicitly excluded?
+5. Critical constraints? (timeline, technical, resources)
 
-Cross-session memory for this project. Updated by craft skills as work progresses.
-
-## Current Feature
-none
-
-## Decisions
-
-## Blockers
-
-## Lessons
-
-## Todos
-
-## Deferred Ideas
-```
-
-Only `Current Feature` is actively read/written in v1 (by `/craft-research` and subsequent feature-level skills). Other sections are structural placeholders for future skills; leave them empty.
+**Stop when:** Clear understanding of vision, goals, and boundaries.
 
 ## Output: .specs/project/PROJECT.md
 
@@ -110,3 +104,4 @@ Only `Current Feature` is actively read/written in v1 (by `/craft-research` and 
 - Vision clear in 1-2 sentences?
 - Goals have measurable outcomes?
 - Scope boundaries explicit?
+```
