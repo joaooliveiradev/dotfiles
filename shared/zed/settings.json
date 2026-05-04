@@ -1,4 +1,5 @@
 {
+  "cli_default_open_behavior": "new_window",
   "minimum_split_diff_width": 99.0,
   "disable_ai": false,
   // ===== VIM =====

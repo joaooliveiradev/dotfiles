@@ -15,3 +15,5 @@
 !agents/
 
 !commands/
+
+!statusline-command.sh

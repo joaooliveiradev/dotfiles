@@ -1,22 +1,14 @@
 ---
 name: craft
-description: Spec-driven development workflow with two ways to develop features, feature mode and quick mode. Feature Mode runs the full pipeline (Spec → Issues → Implement → Review); Spec wraps research + specify, Issues wraps plan + tasks. Quick mode just describe and implement.
-Stack-agnostic. Creates atomic tasks with verification criteria, atomic git commits, requirement traceability, and persistent memory across sessions.
+description: Spec-driven development dev workflow to create tasks.
 metadata:
   author: João Victor
   version: 2.0.0
 ---
-
 <!--
-  Credits to Felipe Rodrigues and the TLC team. Craft is a fork of tlc-spec-driven; most
-  content below is tlc text kept as-is, with surgical craft additions (Research phase,
-  sub-agent delegation, main-agent-no-code rule, slug resolution).
+  Credits to Felipe Rodrigues and the TLC team. Craft minimalist version of tlc-spec-driven;
 -->
-
 # Craft — Spec-Driven Development
-
-Plan and implement projects with precision. Granular tasks. Clear dependencies. Right tools. Zero ceremony.
-
 ```
 ┌────────┐   ┌────────┐   ┌────────────┐   ┌─────────┐
 │  SPEC  │ → │ ISSUES │ → │ IMPLEMENT  │ → │ REVIEW  │
