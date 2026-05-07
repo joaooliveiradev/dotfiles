@@ -1,6 +1,6 @@
-# Execute: Validate & Verify
+# Craft — Review
 
-**Goal**: Verify implementation meets spec AND coding principles. This is NOT a separate phase — verification is part of every task's completion within Execute.
+**Goal**: Verify the implemented feature meets the spec AND the coding principles. This is the final phase of the workflow: gate check → acceptance criteria validation → code quality audit → optional UAT → `review.md`.
 
 ---
 

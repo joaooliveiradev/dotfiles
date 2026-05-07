@@ -8,7 +8,7 @@
 
 ### 1. Load context
 
-Load `.specs/features/[slug]/spec.md` before planning. If `.specs/features/[slug]/context.md` exists, load it too — it contains implementation decisions that constrain the plan (layout choices, behavior preferences, interaction patterns). Decisions marked as "Agent's Discretion" are yours to decide.
+Load `.specs/features/[slug]/spec.md` before planning. The grilling Q&A that produced spec.md is the design intent — anything that isn't in spec.md needs verification through the knowledge chain, not invention.
 
 **CRITICAL: NEVER assume or fabricate information.** If you cannot find an answer through the knowledge verification chain, explicitly say "I don't know" or "I couldn't find documentation for this". Inventing an API, a pattern, or a behavior that doesn't exist is far worse than admitting uncertainty. Wrong assumptions propagate through plan → tasks → implementation and cause cascading failures.
 
@@ -148,7 +148,7 @@ interface AnotherModel {
 
 ## Tips
 
-- **Load context first** — Reads spec.md and context.md to fully understand what to build
+- **Load spec first** — Reads spec.md to fully understand what to build
 - **Reuse is king** — Every component should reference existing patterns
 - **Interfaces first** — Define contracts before implementation
 - **Keep it visual** — Diagrams save 1000 words (check mermaid-studio skill in Skill Integrations)

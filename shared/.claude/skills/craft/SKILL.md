@@ -18,17 +18,14 @@ metadata:
 * Quick Mode: Describe → Implement
 ```
 
-Each wrapper bundles two related sub-steps with internal checkpoints:
-- **Spec** wraps Research (grilling) + Specify (PRD generation).
-- **Issues** wraps Plan (architecture) + Tasks (atomic breakdown).
+- **Spec** runs grill-me and writes the PRD inline — one step, no internal checkpoint.
+- **Issues** wraps Plan (architecture) + Tasks (atomic breakdown), with an internal checkpoint between them.
 
 ## Rules
 
 Each phase reads the artifacts of the phase before it and produces the artifacts the next phase will read. The chain is what makes the workflow work.
 
-- **Spec** — runs Research then Specify in one phase, with an internal checkpoint between them.
-  - *Research*: grills the user (via `/grill-me`) to capture vision, capabilities (P1/P2/P3), scenarios (WHEN/THEN + edges), success signals, decisions, constraints, references, and out-of-scope → `research.md`.
-  - *Specify*: reads `research.md` and transforms it into the formal PRD without asking the user any clarifying questions: user stories (P1/P2/P3), WHEN/THEN/SHALL acceptance criteria, edge cases, NFRs, and traceable requirement IDs. Vagueness is flagged inline for the user to catch at sign-off → `spec.md`.
+- **Spec** — grills the user (via `/grill-me`) and writes the formal PRD directly from the in-context conversation: user stories (P1/P2/P3), WHEN/THEN/SHALL acceptance criteria, edge cases, NFRs, and traceable requirement IDs. Vagueness is flagged inline (`⚠️ VAGUE`) for the user to catch at sign-off → `spec.md`.
 - **Issues** — runs Plan then Tasks in one phase, with an internal checkpoint between them.
   - *Plan*: reads `spec.md` (and `CONCERNS.md` if the codebase has one) to decide HOW: architecture, components and interfaces, code-reuse analysis, data models, error handling → `plan.md`.
   - *Tasks*: reads `plan.md`, `spec.md`, and `TESTING.md` (coverage matrix + parallelism + gate commands) to break the work into atomic tasks (What, Where, Depends on, Reuses, Done when, Tests, Gate, Commit) with a parallel-execution plan → `tasks.md`.
@@ -51,7 +48,6 @@ Each phase reads the artifacts of the phase before it and produces the artifacts
 │   └── CONCERNS.md
 ├── features/
 │   └── [slug]/
-│       ├── research.md
 │       ├── spec.md # Requirements with traceable IDs
 │       ├── plan.md
 │       ├── tasks.md # Atomic tasks with verification (only for Large/Complex)
@@ -65,7 +61,7 @@ Each phase reads the artifacts of the phase before it and produces the artifacts
 
 ## Workflow
 
-**Once per project — `Start project`:**
+**Once per project — `Init project`:**
 
 - New project → scaffold `.specs/`, write `PROJECT.md`. No codebase-map, no `TESTING.md`. `STATE.md` is created later by `Start feature`.
 - Existing codebase → scaffold `.specs/`, write `PROJECT.md`, then run `codebase-map` to derive the 7 brownfield docs (including `TESTING.md`).
@@ -103,9 +99,7 @@ Describe → Pre-implementation check → Implement → Verify -> Track in STATE
 - Codebase docs (when working in existing project)
 - CONCERNS.md (when planning features that touch flagged areas, estimating risk, or modifying fragile components)
 - TESTING.md (when creating tasks or executing — drives test type assignment and gate checks)
-- research.md (when specifying)
 - spec.md (when working on specific feature)
-- context.md (when designing or implementing from user decisions)
 - plan.md (when implementing from plan)
 - tasks.md (when executing tasks)
 
@@ -161,7 +155,7 @@ The orchestrating agent uses this to update `tasks.md` status, traceability in `
 
 | Trigger Pattern                                                                         | Reference                                                 |
 | --------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| Start project                                                                           | [start.md](references/start.md)                           |
+| Init project                                                                            | [init.md](references/init.md)                             |
 | Start feature                                                                           | [feature.md](references/feature.md)                       |
 | Start spec                                                                              | [spec.md](references/spec.md)                             |
 | Start issues                                                                            | [issues.md](references/issues.md)                         |
@@ -183,7 +177,7 @@ When the workflow requires a diagram (architecture overviews, flows, component d
 
 ### Code Exploration → codenavi
 
-When the workflow requires code exploration (codebase research during planning, file references during implementation), check if `codenavi` is installed. If yes, delegate all code exploration to it.
+`codenavi` is always available. Delegate all code exploration to it — codebase research during planning, file references during implementation, structural search during tasks. Do not fall back to ad-hoc grep/find for exploration tasks; codenavi is the single tool.
 
 ## Knowledge Verification Chain
 
@@ -206,4 +200,4 @@ Step 5: Flag uncertain → "I'm not certain about X — here's my reasoning, but
 
 ## Code Analysis
 
-Use available tools with graceful degradation. See [code-analysis.md](helpers/code-analysis.md).
+Use `codenavi` for code analysis. See [code-analysis.md](helpers/code-analysis.md).

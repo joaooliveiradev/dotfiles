@@ -6,18 +6,6 @@ This is where code gets written. Every task follows the same cycle: pick → sta
 
 ---
 
-## Resolve the slug
-
-Read `.specs/project/STATE.md` → `Current Feature`. That is the active slug.
-
-- If it is `none` or missing → **stop** and tell the user:
-  > "No active feature found. Run `/craft feature` first."
-- Print the resolved slug on every invocation so the user sees what's active.
-
-Then read `.specs/features/[slug]/tasks.md` to drive the rest of this skill.
-
----
-
 ## MANDATORY: Before Starting Any Implementation
 
 **Read [coding-principles.md](../helpers/coding-principles.md) and state:**
@@ -38,17 +26,27 @@ All steps below apply identically whether running in the main context or a sub-a
 The only difference: sub-agents report results back to the orchestrator rather than
 continuing to the next task.
 
-### 1. Pick Task
+### 1 — Read the active slug from STATE.md
+
+Read `.specs/project/STATE.md` → `Current Feature`. That is the active slug.
+
+- If it is `none` or missing → **stop** and tell the user:
+  > "No active feature found. Run `/craft feature` first."
+- Print the resolved slug so the user sees what's active.
+
+Open the feature folder at `.specs/features/[slug]/`. `tasks.md` must exist there — if not, stop and tell the user to run `/craft issues` first.
+
+### 2. Pick Task
 
 From tasks.md (if exists) or from the execution plan above. User specifies ("implement T3") or suggest next available.
 
-### 2. Verify Dependencies
+### 3. Verify Dependencies
 
 If tasks.md exists, check dependencies. If using inline plan, follow the order listed.
 
 ❌ If blocked: "T3 depends on T2 which isn't done. Should I do T2 first?"
 
-### 3. State Implementation Plan
+### 4. State Implementation Plan
 
 Before writing code:
 
@@ -58,7 +56,7 @@ Approach: [brief description]
 Success: [how to verify]
 ```
 
-### 4. Write Tests First (RED)
+### 5. Write Tests First (RED)
 
 If the task includes tests (per the Tests field in tasks.md or TESTING.md coverage matrix):
 
@@ -74,15 +72,15 @@ If the task includes tests (per the Tests field in tasks.md or TESTING.md covera
 - Each acceptance criterion from "Done when" maps to at least one test assertion
 - Edge cases from spec.md that apply to this task get test cases too
 
-If the task does NOT include tests (e.g., entity-only, config-only), skip to Step 4b.
+If the task does NOT include tests (e.g., entity-only, config-only), skip to Step 5b.
 
-### 4b. Implement (GREEN)
+### 5b. Implement (GREEN)
 
 Write the minimum implementation needed to satisfy the task's success criteria: pass all relevant tests (when present) and meet the defined verification/gate checks when there are no direct tests.
 
 **HARD CONSTRAINTS:**
 
-- Do NOT modify tests written in Step 4. The tests are the spec — implementation conforms to them.
+- Do NOT modify tests written in Step 5. The tests are the spec — implementation conforms to them.
 - Do NOT weaken assertions (making them less specific to pass more easily)
 - Do NOT delete or skip test cases
 - Do NOT use the test framework's skip/disable/pending mechanism to bypass failing tests
@@ -97,7 +95,7 @@ Follow [coding-principles.md](../helpers/coding-principles.md):
 - Touch ONLY listed files
 - No scope creep
 
-### 5. Gate Check (VERIFY)
+### 6. Gate Check (VERIFY)
 
 Run the gate check command from the task definition. This is MANDATORY — not "if applicable."
 
@@ -117,7 +115,7 @@ Run the gate check command from the task definition. This is MANDATORY — not "
 The gate check is deterministic. The test runner decides if the code is correct,
 not the agent's self-assessment.
 
-### 6. Post-Gate Review
+### 7. Post-Gate Review
 
 After the gate check passes:
 
@@ -133,7 +131,7 @@ After the gate check passes:
    - Yes → Simplify, re-run gate
    - No → Proceed to commit
 
-### 7. Atomic Git Commit
+### 8. Atomic Git Commit
 
 Each task gets its own commit immediately after verification. Never batch multiple tasks into one commit.
 
@@ -211,7 +209,7 @@ for reuse across multiple endpoints.
 - Include only files listed in the task — never sneak in "while I'm here" changes
 - If tests are part of the task, include them in the same commit
 
-### 8. Scope Guardrail
+### 9. Scope Guardrail
 
 During implementation, you will notice things that could be improved, refactored, or added. **Do not act on them.** Instead:
 
@@ -221,11 +219,16 @@ During implementation, you will notice things that could be improved, refactored
 
 **The heuristic:** "Is this in my task definition?" If no, don't touch it.
 
-### 9. Update Task Status
+### 10. Update Task Status
 
 Mark task complete in tasks.md. Update requirement traceability in spec.md
 
----
+### 11. Phase Handoff
+
+After updating task status, check whether **all tasks** in `tasks.md` are now complete.
+
+- **Not all complete** → loop back to Step 2 with the next task.
+- **All complete** → ask: *"All tasks complete. Can I call Review now? (y/n)"*. `yes` → invoke `references/review.md` with the resolved slug. Anything else → stop. The user resumes later with `Start review`.
 
 ## Execution Template
 

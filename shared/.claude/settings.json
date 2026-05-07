@@ -86,5 +86,7 @@
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
-  }
+  },
+  "theme": "auto",
+  "autoCompactEnabled": false
 }

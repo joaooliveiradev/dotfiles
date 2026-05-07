@@ -8,41 +8,28 @@
 
 ---
 
-## Resolve the slug
+## Process
+
+### 1 — Read the active slug from STATE.md
 
 Read `.specs/project/STATE.md` → `Current Feature`. That is the active slug.
 
 - If it is `none` or missing → **stop** and tell the user:
   > "No active feature found. Run `/craft feature` first."
-- Print the resolved slug on every invocation so the user sees what's active.
+- Print the resolved slug so the user sees what's active.
 
 Verify `.specs/quick/[slug]/` exists. If it doesn't, stop and tell the user to run `/craft feature` (quick mode) first.
 
----
-
-## When to Use
-
-| Use quick mode             | Use full pipeline                   |
-| -------------------------- | ----------------------------------- |
-| Bug fixes with known cause | New features with multiple stories  |
-| Config changes             | Architectural changes               |
-| Small UI tweaks            | Features requiring design decisions |
-| Adding a field/column      | Multi-component features            |
-| One-off scripts            | Anything with unclear scope         |
-| Dependency updates         | Features requiring user stories     |
-
-**Rule of thumb:** If you can describe it in one sentence AND it touches ≤3 files, it's a quick task.
-
-## Process
-
-### 1. Describe the Task
+### 2. Describe the Task
 
 User provides a clear, one-sentence description. If vague, ask for specifics:
 
 - ❌ "Fix the login" → Ask: "What's broken? What should happen instead?"
 - ✅ "Fix: login button returns 401 because token refresh skips expired check"
 
-### 2. Pre-Implementation Check
+Once the description is clear, write `.specs/quick/[slug]/TASK.md` using the TASK.md template below. Fill in the description, leave Files Changed / Verification / Commit fields as placeholders — they get filled as later steps complete.
+
+### 3. Pre-Implementation Check
 
 Before writing code, state:
 
@@ -55,7 +42,7 @@ Verify: [how to prove it works]
 
 Get user approval before proceeding. If the pre-implementation check reveals the task is bigger than expected (>3 files, unclear dependencies, design decisions needed), recommend the full pipeline instead.
 
-### 3. Implement
+### 4. Implement
 
 Follow [coding-principles.md](../helpers/coding-principles.md):
 
@@ -63,11 +50,11 @@ Follow [coding-principles.md](../helpers/coding-principles.md):
 - Touch ONLY listed files
 - No scope creep — fix the thing, nothing else
 
-### 4. Verify
+### 5. Verify
 
-Run verification from step 2. Mark done only after verification passes.
+Run verification from step 3. Mark done only after verification passes.
 
-### 5. Commit
+### 6. Commit
 
 Atomic commit following [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/):
 
@@ -83,9 +70,9 @@ Examples:
 - `feat(settings): add dark mode toggle`
 - `chore(deps): update eslint to v9`
 
-### 6. Track
+### 7. Track
 
-Update `.specs/project/STATE.md` with quick task record (see state-management.md Quick Tasks section).
+Update `.specs/project/STATE.md` with quick task record (see state-management.md Quick Tasks section). Update the TASK.md created in step 2 with the final Files Changed, Verification result, and commit hash. Write `.specs/quick/[slug]/SUMMARY.md` from the SUMMARY.md template below — short bullets of what was done plus the commit hash.
 
 ---
 
@@ -122,6 +109,18 @@ Quick tasks live separately from planned features:
 
 - [ ] [How to verify it works]
 - [ ] [Expected behavior after fix]
+
+## Commit
+
+`[hash]` — [commit message]
+```
+
+**SUMMARY.md template:**
+
+```markdown
+# What was done
+
+[1–3 bullets describing what changed and why]
 
 ## Commit
 

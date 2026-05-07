@@ -1,98 +1,29 @@
-# Code Analysis Tools
+# Code Analysis
 
-Use graceful degradation for code search and structural analysis.
-
-## Tool Priority
-
-1. **ast-grep** (`sg`) - Structural pattern-based search
-2. **ripgrep** (`rg`) - Fast context-aware text search
-3. **grep** - Standard text search (always available)
-
-## Detection
-
-Check tool availability before use:
-
-```bash
-# Check for ast-grep
-if command -v sg >/dev/null 2>&1; then
-  # Use ast-grep for structural search
-elif command -v rg >/dev/null 2>&1; then
-  # Fall back to ripgrep
-else
-  # Use standard grep as final fallback
-fi
-```
-
-## Usage Examples
-
-**Finding function definitions:**
-
-```bash
-# ast-grep (best - structural)
-sg -p 'function $NAME($$$) { $$$ }'
-
-# ripgrep (fallback - fast text)
-rg '^function\s+\w+\(' --type-add 'source:*.[extension]' -t source
-
-# grep (last resort - basic)
-grep -r '^function ' --include="*.[extension]"
-```
-
-**Finding imports/requires:**
-
-```bash
-# ast-grep
-sg -p 'import { $$$ } from "$MODULE"'
-
-# ripgrep
-rg '^import .* from' --type-add 'source:*.[extension]' -t source
-
-# grep
-grep -r '^import ' --include="*.[extension]"
-```
-
-**Finding class/component definitions:**
-
-```bash
-# ast-grep
-sg -p 'class $NAME { $$$ }'
-
-# ripgrep
-rg '^(class|export class)\s+\w+' --type-add 'source:*.[extension]' -t source
-
-# grep
-grep -r '^class ' --include="*.[extension]"
-```
-
-## Search Scope
-
-**Best practices:**
-
-- Limit to source file extensions relevant to project
-- Exclude directories: `node_modules`, `vendor`, `dist`, `build`, `.git`
-- Focus on source directories: `src`, `lib`, `app`
-- Use file type filters when available
-
-**Performance tips:**
-
-- Use specific patterns over broad searches
-- Limit directory depth with `--max-depth` (ripgrep/grep)
-- Cache results for repeated queries
-
-## Fallback Notice
-
-If ast-grep unavailable, display once per session:
-
-```
-⚠️ ast-grep not detected. Install for more precise structural code analysis.
-   https://ast-grep.github.io/guide/quick-start.html
-```
+`codenavi` is the single tool for code analysis in the craft workflow. It is always available — do not fall back to ad-hoc shell tools.
 
 ## When to Use
 
-- Finding usage patterns across codebase
-- Identifying code structure and organization
-- Locating function/class/component definitions
-- Analyzing import/dependency patterns
-- Refactoring impact analysis
-- Code navigation in unfamiliar codebases
+Delegate to `codenavi` for any of:
+
+- Locating function / class / component definitions
+- Tracing usage patterns and call sites across the codebase
+- Mapping import / dependency relationships
+- Refactoring impact analysis (what breaks if I change X?)
+- Navigating an unfamiliar codebase area before planning or implementing
+- Surfacing patterns to reuse during the Plan phase
+- Finding existing code referenced by a task's `Reuses` field during Implement
+
+## How to Invoke
+
+Invoke `codenavi` directly. Do not wrap it in custom shell pipelines. Pass the question or pattern as `codenavi` expects, and let it drive the search.
+
+## What Not to Do
+
+- Don't run `grep -r` / `find` / `ripgrep` for exploration when codenavi answers the same question.
+- Don't write throwaway scripts to traverse the codebase. Delegate.
+- Don't bypass codenavi to "save a step" — the consistency is the point. Each phase that loads code context loads it through the same tool, so plan, tasks, and implement see the same shape of the codebase.
+
+## Output Handling
+
+`codenavi` returns structured findings. When you reference its output in `plan.md` or task definitions, copy concrete file paths and symbol names verbatim — do not paraphrase locations.

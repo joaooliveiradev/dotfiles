@@ -24,7 +24,7 @@
   "theme": {
     "mode": "dark",
     "light": "poimandres",
-    "dark": "Catppuccin Mocha - No Italics",
+    "dark": "VSCode Dark Modern",
   },
   // TOOLBAR
   "toolbar": {

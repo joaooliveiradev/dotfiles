@@ -1,14 +1,14 @@
 # Codebase map
 
-**Invoked by:** `references/start.md` (existing-codebase branch only). **Not a user-facing trigger** — the user reaches this helper through `Start project`, never directly.
+**Invoked by:** `references/init.md` (existing-codebase branch only). Not a user-facing trigger — the user reaches this helper through `/craft init`, never directly.
 
 **Goal:** Understand existing project structure before adding features.
 
 ## Process
 
-Use `codenavi` skill for code exploration.
+`codenavi` is the **primary and only** tool for code exploration in this helper. There is no fallback — do not use `grep`/`find`/`rg` directly, do not write throwaway scripts. See [code-analysis.md](code-analysis.md).
 
-**High-level approach:**
+Drive every step below by delegating to `codenavi`:
 
 1. Explore directory structure systematically
 2. Identify technology stack from dependency manifests
@@ -19,9 +19,9 @@ Use `codenavi` skill for code exploration.
 
 **Analysis depth:**
 
-- Sample 5-10 representative files per category
+- Sample 5-10 representative files per category (via codenavi)
 - Focus on consistency and patterns, not exhaustive coverage
-- Extract actual examples, not assumptions
+- Extract actual examples verbatim from codenavi output, not assumptions
 
 ## Output: 7 Files in .specs/codebase/
 

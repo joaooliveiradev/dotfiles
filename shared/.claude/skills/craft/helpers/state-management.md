@@ -10,7 +10,10 @@
 # State
 
 **Last Updated:** [ISO timestamp]
-**Current Work:** [Feature name] - [Task identifier]
+
+## Current Feature
+
+[slug]
 
 ---
 
@@ -86,7 +89,7 @@ Capture in-progress thoughts and action items that don't fit in active tasks.
 | Quick task completed             | Add row to Quick Tasks table           |
 | Scope creep captured             | Add to Deferred Ideas                  |
 | In-progress thought              | Add to Todos                           |
-| Session end                      | Update "Last Updated" + "Current Work" |
+| Session end                      | Update "Last Updated" timestamp        |
 
 ## Size Management (Hybrid Strategy)
 

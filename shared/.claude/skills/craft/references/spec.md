@@ -1,53 +1,142 @@
 # Craft — Spec
 
-**Goal**: Produce `.specs/features/[slug]/research.md` and `.specs/features/[slug]/spec.md` by chaining Research and Specify behind a single phase.
+## Goal
+
+Grill the user about the feature, then write `.specs/features/[slug]/spec.md` — a testable PRD with traceable IDs.
 
 ## Process
 
-### 1 — Read the active slug from STATE.md
+1. **Resolve the slug.** Read `.specs/project/STATE.md` → `Current Feature`. If `none` or missing → stop and tell the user to run `/craft feature` first. Print the resolved slug.
+2. **Ask for a feature description.** One short question: *"Briefly describe the feature: what are you trying to build, and what problem does it solve?"*
+3. **Run grill-me.** Invoke the `grill-me` skill with the user's description as context. Don't pass the slug. Don't prescribe stop conditions — grill-me decides when it's done. The full Q&A stays in this conversation.
+4. **Write spec.md.** Write `.specs/features/[slug]/spec.md` using the template below, filled entirely from the grilling conversation. Don't ask the user any clarifying questions while writing — flag gaps inline with `⚠️ VAGUE: [what's unclear]` and surface every flag at the top of the file.
+5. **Sign-off.** Present `spec.md`, surfacing the `⚠️ VAGUE` flags.
+   - **Approved** → ask: *"Can I call Issues now? (y/n)"*. `yes` → invoke `references/issues.md`. Anything else → stop.
+   - **Rejected** → re-run from step 3 to fill the gaps.
 
-Read `.specs/project/STATE.md` → `Current Feature`. That is the active slug.
 
-- If it is `none` or missing → **stop** and tell the user:
-  > "No active feature found. Run `/craft feature` first."
-- Print the resolved slug so the user sees what's active.
+## Template: `.specs/features/[slug]/spec.md`
 
-The feature folder is `.specs/features/[slug]/` (created by `/craft feature`). If `research.md` or `spec.md` already exist there, the user may be iterating on an existing feature — ask whether to overwrite or push more content into them.
+```markdown
+# [Feature Name] Specification
 
-### 2 — Ask the user for a feature summary
+## Problem Statement
 
-Ask the user one short question:
+[Describe the problem in 2-3 sentences. What pain point are we solving? Why now?]
 
-> "Briefly describe the feature: what are you trying to build, and what problem does it solve?"
+## Goals
 
-Capture the answer as a one-paragraph summary. This is the seed Research will hand to grill-me.
+- [ ] [Primary goal with measurable outcome]
+- [ ] [Secondary goal with measurable outcome]
 
-### 3 — Run Research
+## Out of Scope
 
-Invoke `helpers/research.md` with the resolved slug and the feature summary. It produces `.specs/features/[slug]/research.md` and returns.
+Explicitly excluded. Documented to prevent scope creep.
 
-### 4 — Run Specify
+| Feature     | Reason         |
+| ----------- | -------------- |
+| [Feature X] | [Why excluded] |
+| [Feature Y] | [Why excluded] |
 
-Invoke `helpers/specify.md` with the resolved slug. It produces `.specs/features/[slug]/spec.md` and returns.
+---
 
-### 5 — Sign-off
+## User Stories
 
-Present `spec.md` to the user, surfacing any `⚠️ VAGUE` flags the helper recorded.
+### P1: [Story Title] ⭐ MVP
 
-- **Approved** → ask: *"Can I call Issues now? (y/n)"*.
-  - `yes` → invoke `references/issues.md`.
-  - anything else → stop. The user resumes later with `Start issues`.
-- **Rejected** → re-run from step 3 (Research) to fill the gaps the user pointed out
+**User Story**: As a [role], I want [capability] so that [benefit].
+
+**Why P1**: [Why this is critical for MVP]
+
+**Acceptance Criteria**:
+
+- [FEAT-01.1] WHEN [user action/event] THEN system SHALL [expected behavior]
+- [FEAT-01.2] WHEN [user action/event] THEN system SHALL [expected behavior]
+- [FEAT-01.3] WHEN [edge case] THEN system SHALL [graceful handling]
+
+**Independent Test**: [How to verify this story works alone — e.g., "Can demo by doing X and seeing Y"]
+
+---
+
+### P2: [Story Title]
+
+**User Story**: As a [role], I want [capability] so that [benefit].
+
+**Why P2**: [Why this isn't MVP but important]
+
+**Acceptance Criteria**:
+
+- [FEAT-02.1] WHEN [event] THEN system SHALL [behavior]
+- [FEAT-02.2] WHEN [event] THEN system SHALL [behavior]
+
+**Independent Test**: [How to verify]
+
+---
+
+### P3: [Story Title]
+
+**User Story**: As a [role], I want [capability] so that [benefit].
+
+**Why P3**: [Why this is nice-to-have]
+
+**Acceptance Criteria**:
+
+- [FEAT-03.1] WHEN [event] THEN system SHALL [behavior]
+
+---
+
+## Edge Cases
+
+- WHEN [boundary condition] THEN system SHALL [behavior]
+- WHEN [error scenario] THEN system SHALL [graceful handling]
+- WHEN [unexpected input] THEN system SHALL [validation response]
+
+---
+
+## Non-Functional Requirements
+
+Constraints and quality bars carried over from grilling. Plan must respect these.
+
+- [Constraint — e.g., "P95 latency < 200ms for /search"]
+- [Constraint — e.g., "Must support offline mode on mobile"]
+- [Constraint — e.g., "WCAG 2.1 AA accessibility"]
+
+---
+
+## Requirement Traceability
+
+Each acceptance clause gets a unique ID for tracking across plan, tasks, and validation. One row per WHEN/THEN clause — not per story — so tasks can claim individual clauses and orphans become detectable.
+
+
+| Clause ID   | Story       | Clause                       | Status  |
+| ----------- | ----------- | ---------------------------- | ------- |
+| [FEAT]-01.1 | P1: [Story] | WHEN [event] THEN [behavior] | Pending |
+| [FEAT]-01.2 | P1: [Story] | WHEN [event] THEN [behavior] | Pending |
+| [FEAT]-01.3 | P1: [Story] | WHEN [edge] THEN [handling]  | Pending |
+| [FEAT]-02.1 | P2: [Story] | WHEN [event] THEN [behavior] | Pending |
+
+**ID format:** `[CATEGORY]-[STORY].[CLAUSE]` (e.g., `AUTH-01.1`).
+
+**Status values:** Pending → In Plan → In Tasks → Implementing → Verified
+
+**Coverage:** X total, Y mapped to tasks, Z unmapped ⚠️
+
+---
+
+## Success Criteria
+
+How we know the feature is successful:
+
+- [ ] [Measurable outcome — e.g., "User can complete X in < 2 minutes"]
+- [ ] [Measurable outcome — e.g., "Zero errors in Y scenario"]
+```
 
 ## Rules
 
-- **One checkpoint, at the end.** Research and Specify run back-to-back. The user signs off on `spec.md` only.
-- **Specify never asks clarifying questions.** Vagueness is flagged inline with `⚠️ VAGUE` and surfaced at sign-off.
-- **Helpers do the work.** This wrapper orchestrates only. The grill loop lives in `helpers/research.md`; the transformation logic lives in `helpers/specify.md`.
-- **Both artifacts persist.** `research.md` and `spec.md` both live in `.specs/features/[slug]/`. Downstream phases will read either.
-
-## Tips
-
-- **Research is exploratory; Specify is mechanical.** Keep them as two distinct mental modes.
-- **Vagueness is documented, never resolved.** Caught at sign-off; bounces back to Research if rejected.
-- **One slug, one Spec phase.** If the user wants to change scope mid-flow, restart from step 3.
+- **P1 = Vertical Slice** — A complete, demo-able feature, not just backend or frontend
+- **WHEN/THEN is code** — If you can't write it as a test, rewrite it
+- **Requirement IDs are mandatory** — Every story maps to trackable IDs
+- **Edge cases matter** — What breaks? What's empty? What's huge?
+- **Out of Scope prevents creep** — If it's not here, it doesn't get built
+- **Never ask clarifying questions while writing.** Flag vagueness with `⚠️ VAGUE`; bounce at sign-off.
+- **Atomize scenarios.** A single scenario from grilling can become multiple WHEN/THEN clauses — split until each clause is independently testable. Each clause gets its own ID.

@@ -1,26 +1,12 @@
 # Feature
 
-**Trigger:** "Start feature"
-
 ## Goal
-Entry point for any new work. **The only place in the entire workflow where the user is asked for a slug.** Sets up the per-feature folder, creates a git branch, and writes the slug into `STATE.md` so every downstream phase (`spec`, `quick`, `issues`, `implement`, `review`) can read it from one source of truth.
 
-Run `/craft feature` **before** `spec` or `quick`.
-
-## What this command does
-
-1. Asks the user: *"Spec mode or quick mode?"*
-2. Asks the user for a **slug** (kebab-case feature name).
-3. Reads `.specs/project/STATE.md` (if it exists). If `Current Feature` is set to a different slug, asks the user whether to overwrite it.
-4. Creates the feature folder:
-   - Spec mode → `.specs/features/[slug]/`
-   - Quick mode → `.specs/quick/[slug]/`
-5. Creates a git branch named after the slug (`git checkout -b [slug]`).
-6. Writes the slug into `.specs/project/STATE.md` under `Current Feature`. Creates STATE.md with the minimal template if it does not exist yet.
+Entry point for any new work. **The only place in the entire workflow where the user is asked for a slug.** Asks for spec/quick mode, creates the feature folder and git branch, and writes the slug into `STATE.md` as the single source of truth for every downstream phase.
 
 ## Process
 
-1. **Verify setup.** Confirm `.specs/project/` exists. If it doesn't, stop and tell the user to run `/craft start` first.
+1. **Verify setup.** Confirm `.specs/project/` exists. If it doesn't, stop and tell the user to run `/craft init` first.
 2. **Ask: spec or quick?** Branch on the answer; remember it for the folder choice in step 6.
 3. **Ask for the slug.** Require kebab-case (lowercase, hyphens). If the input violates that, ask again.
 4. **Check `STATE.md → Current Feature`:**
@@ -52,13 +38,4 @@ Used only when STATE.md does not exist yet. The full structure (Decisions, Block
 
 ## Rules
 
-- **`/craft feature` is the ONLY place that asks the user for a slug.** Every downstream skill reads it from `STATE.md`. Never duplicate this prompt anywhere else.
 - **Always check `STATE.md` for an existing `Current Feature` before overwriting.** Never silently replace an active slug.
-- **This command is plumbing.** Sets up the slug, folder, branch, and STATE.md (if missing). Nothing else.
-- **Never override the git author** when creating the branch. Branch creation is pure git plumbing — it does not produce commits.
-
-## Tips
-
-- **One slug, one branch, one folder.** If the user wants to change scope mid-flow, run `/craft feature` again to re-set the active slug.
-- **Slug naming is sticky.** It becomes the branch name, the folder name, and the key downstream skills look up — pick something meaningful.
-- **Quick or spec, same plumbing.** Both modes get a git branch and a slug in `STATE.md`. The only difference is which folder gets created.

@@ -1,20 +1,8 @@
-# Start
-
-**Trigger:** "Start project"
+# Init
 
 ## Goal
-One-time setup for using the craft workflow in a project. Scaffolds the `.specs/` tree, makes sure it's gitignored, interviews the user to produce `PROJECT.md`, and — for existing codebases — runs `codebase-map` to derive the brownfield docs (including `TESTING.md`).
 
-This skill is run **once per project**.
-
-## What this command does
-
-1. Asks the user: *"Is this a new project or an existing codebase?"*
-2. Creates `.specs/`, `.specs/project/`, `.specs/features/`, and (existing only) `.specs/codebase/`.
-3. Ensures `.specs/` is listed in the project's `.gitignore`.
-4. Interviews the user to produce `.specs/project/PROJECT.md`.
-5. **Existing codebase only:** invokes `helpers/codebase-map.md` to generate the 7 brownfield docs (`STACK.md`, `ARCHITECTURE.md`, `CONVENTIONS.md`, `STRUCTURE.md`, `TESTING.md`, `INTEGRATIONS.md`, `CONCERNS.md`).
-6. **New project:** skips codebase-map.
+One-time setup for using craft in a project. Scaffolds the `.specs/` tree, ensures it's gitignored, interviews the user to produce `PROJECT.md`, and — for existing codebases — runs `codebase-map` to derive the brownfield docs (including `TESTING.md`).
 
 ## Process
 
@@ -29,7 +17,7 @@ This skill is run **once per project**.
    - If `.gitignore` exists and already lists `.specs/` or `.specs`, do nothing.
    - Otherwise append under a `# Craft workflow` comment block.
 6. **Run the PROJECT.md interview** (see below). Write `.specs/project/PROJECT.md` when done.
-7. **If existing codebase → invoke `helpers/codebase-map.md`.** That helper produces all 7 brownfield docs, including `TESTING.md`, derived from the actual code. Do not interview the user for `TESTING.md` — it is always derived from `codebase-map` output.
+7. **If existing codebase → invoke `helpers/codebase-map.md`.** That helper produces all 7 brownfield docs.
 8. **Confirm and point to next step:** suggest `/craft feature` to begin the first feature.
 
 ## Rules
