@@ -2,8 +2,6 @@
 
 **Goal**: Break the plan into GRANULAR, ATOMIC tasks. Clear dependencies. Right tools. Parallel execution plan. Produce `.specs/features/[slug]/tasks.md`. Reads `plan.md`, `spec.md`, and `.specs/codebase/TESTING.md`.
 
-**Invoked by**: `references/issues.md`. Receives a resolved `[slug]` and an existing `plan.md` + `spec.md`.
-
 ## Why Granular Tasks?
 
 | Vague Task (BAD) | Granular Tasks (GOOD)             |
@@ -82,7 +80,7 @@ Group tasks into phases. Identify what can run in parallel.
 
 ### 5. Validate Before Presenting (MANDATORY)
 
-Before returning tasks to the wrapper, run ALL four pre-approval checks. These are NOT optional — they are gates. If any check fails, restructure the tasks and re-run until all pass.
+Before returning tasks to the wrapper, run ALL three pre-approval checks. These are NOT optional — they are gates. If any check fails, restructure the tasks and re-run until all pass.
 
 **Check 1: Task Granularity** — verify each task is atomic (see Granularity Check section).
 
@@ -90,13 +88,11 @@ Before returning tasks to the wrapper, run ALL four pre-approval checks. These a
 
 **Check 3: Test Co-location Validation** — verify every task's `Tests` field matches the TESTING.md coverage matrix (see Test Co-location Validation section). Build the validation table and include it in the output.
 
-**Check 4: Requirement Coverage** — verify every clause ID in `spec.md`'s traceability table is referenced by at least one task's `Requirement` field (see Requirement Coverage section). Build the coverage table and include it in the output.
-
-**Return all four tables alongside `tasks.md`** so the wrapper can present validation results at sign-off. Any ❌ means you MUST restructure before returning — never hand the wrapper failing tasks to present.
+**Output all three tables with the tasks** so the user can see the validation results. Any ❌ means you MUST restructure before presenting — do not show failing tasks to the user and ask them to approve.
 
 ### 6. Write tasks.md
 
-Write `.specs/features/[slug]/tasks.md` along with all four validation tables.
+Write `.specs/features/[slug]/tasks.md` along with all three validation tables.
 
 ---
 
@@ -355,25 +351,6 @@ When a task creates code that can't be tested until a later task completes (e.g.
 2. **Merge backward:** Absorb the blocking dependency into the current task so it becomes self-testable (e.g., controller task includes its own module registration).
 
 Pick whichever option keeps tasks atomic and cohesive. The goal: no task produces unverified code. If code can't be tested in the task that creates it, the task boundaries are wrong.
-
----
-
-## Requirement Coverage
-
-Before approving tasks, verify EVERY clause ID in `spec.md`'s traceability table is referenced by at least one task's `Requirement` field. This catches orphaned clauses — acceptance criteria the spec demanded that no task implements.
-
-| Clause ID | Tasks Covering It | Status |
-| --------- | ----------------- | ------ |
-| [FEAT]-01.1 | T1, T3 | ✅ Covered |
-| [FEAT]-01.2 | T2 | ✅ Covered |
-| [FEAT]-01.3 | (none) | ❌ ORPHANED |
-
-**Rules:**
-
-- Every clause ID from spec.md must appear in at least one task's `Requirement` field.
-- A task MAY reference multiple clause IDs (`Requirement: FEAT-01.1, FEAT-01.3`) when one atomic deliverable satisfies several.
-- Any ❌ ORPHANED → restructure tasks to add coverage, or bounce back to Specify if the clause shouldn't exist.
-- Coverage is one-way: spec → tasks. A task is allowed to reference zero clauses only if it's pure scaffolding (e.g., project setup) — flag these explicitly with `Requirement: scaffolding`.
 
 ---
 

@@ -8,7 +8,7 @@ This is where code gets written. Every task follows the same cycle: pick → sta
 
 ## MANDATORY: Before Starting Any Implementation
 
-**Read [coding-principles.md](../helpers/coding-principles.md) and state:**
+**Read [coding-principles.md](../../references/coding-principles.md) and state:**
 
 1. **Assumptions** - What am I assuming? Any uncertainty?
 2. **Files to touch** - List ONLY files this task requires
@@ -34,7 +34,7 @@ Read `.specs/project/STATE.md` → `Current Feature`. That is the active slug.
   > "No active feature found. Run `/craft feature` first."
 - Print the resolved slug so the user sees what's active.
 
-Open the feature folder at `.specs/features/[slug]/`. `tasks.md` must exist there — if not, stop and tell the user to run `/craft issues` first.
+Open the feature folder at `.specs/features/[slug]/`. `tasks.md` must exist there — if not, stop and tell the user to run `/craft tasks` first.
 
 ### 2. Pick Task
 
@@ -89,7 +89,7 @@ Write the minimum implementation needed to satisfy the task's success criteria: 
 If a test is genuinely wrong (tests the wrong behavior per spec), STOP and ask the user
 before modifying it. Never silently change a test.
 
-Follow [coding-principles.md](../helpers/coding-principles.md):
+Follow [coding-principles.md](../../references/coding-principles.md):
 
 - Simplest code that works
 - Touch ONLY listed files
@@ -134,14 +134,6 @@ After the gate check passes:
 ### 8. Atomic Git Commit
 
 Each task gets its own commit immediately after verification. Never batch multiple tasks into one commit.
-
-⚠️ **Commit author — INVIOLABLE.**
-
-- Every commit produced by this skill MUST use the git author already configured in the local git environment where the user invoked Craft (whatever `git config user.name` / `git config user.email` resolves to in that working directory).
-- **NEVER** override the author. Do not pass `--author=...`, do not set `GIT_AUTHOR_*` / `GIT_COMMITTER_*` environment variables, do not edit `.git/config`.
-- **NEVER** attribute commits to Claude in any field. No `Co-Authored-By: Claude ...` trailer. No Claude in the author field. No Claude in the committer field. No `🤖 Generated with Claude` footer.
-- **NEVER** use `--no-verify`, `--no-gpg-sign`, or any flag that bypasses the user's local hooks/signing configuration.
-- The commit looks exactly like the user wrote it themselves — because, as far as git history is concerned, they did.
 
 **Format ([Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/)):**
 
@@ -228,7 +220,7 @@ Mark task complete in tasks.md. Update requirement traceability in spec.md
 After updating task status, check whether **all tasks** in `tasks.md` are now complete.
 
 - **Not all complete** → loop back to Step 2 with the next task.
-- **All complete** → ask: *"All tasks complete. Can I call Review now? (y/n)"*. `yes` → invoke `references/review.md` with the resolved slug. Anything else → stop. The user resumes later with `Start review`.
+- **All complete** → ask: *"All tasks complete. Can I call Review now? (y/n)"*. `yes` → invoke `workflow/review/review.md` with the resolved slug. Anything else → stop. The user resumes later with `Start review`.
 
 ## Execution Template
 

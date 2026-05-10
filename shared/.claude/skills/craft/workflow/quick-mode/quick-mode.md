@@ -44,7 +44,7 @@ Get user approval before proceeding. If the pre-implementation check reveals the
 
 ### 4. Implement
 
-Follow [coding-principles.md](../helpers/coding-principles.md):
+Follow [coding-principles.md](../../references/coding-principles.md):
 
 - Simplest code that works
 - Touch ONLY listed files
@@ -62,7 +62,7 @@ Atomic commit following [Conventional Commits 1.0.0](https://www.conventionalcom
 <type>(<scope>): <description>
 ```
 
-Use imperative mood, lowercase, no period. See [implement.md](implement.md) for full types table.
+Use imperative mood, lowercase, no period. See [implement.md](../implement/implement.md) for full types table.
 
 Examples:
 

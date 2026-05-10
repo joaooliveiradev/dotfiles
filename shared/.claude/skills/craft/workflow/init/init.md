@@ -17,7 +17,7 @@ One-time setup for using craft in a project. Scaffolds the `.specs/` tree, ensur
    - If `.gitignore` exists and already lists `.specs/` or `.specs`, do nothing.
    - Otherwise append under a `# Craft workflow` comment block.
 6. **Run the PROJECT.md interview** (see below). Write `.specs/project/PROJECT.md` when done.
-7. **If existing codebase → invoke `helpers/codebase-map.md`.** That helper produces all 7 brownfield docs.
+7. **If existing codebase → invoke `workflow/init/codebase-map.md`.** That helper produces all 7 brownfield docs.
 8. **Confirm and point to next step:** suggest `/craft feature` to begin the first feature.
 
 ## Rules

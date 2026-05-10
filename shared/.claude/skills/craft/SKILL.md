@@ -11,7 +11,7 @@ metadata:
 # Craft — Spec-Driven Development
 ```
 ┌────────┐   ┌────────┐   ┌────────────┐   ┌─────────┐
-│  SPEC  │ → │ ISSUES │ → │ IMPLEMENT  │ → │ REVIEW  │
+│  SPEC  │ → │ TASKS  │ → │ IMPLEMENT  │ → │ REVIEW  │
 └────────┘   └────────┘   └────────────┘   └─────────┘
 
 * Feature Mode: full pipeline, all phases required.
@@ -19,14 +19,14 @@ metadata:
 ```
 
 - **Spec** runs grill-me and writes the PRD inline — one step, no internal checkpoint.
-- **Issues** wraps Plan (architecture) + Tasks (atomic breakdown), with an internal checkpoint between them.
+- **Tasks** wraps Plan (architecture) + Tasks (atomic breakdown), with an internal checkpoint between them.
 
 ## Rules
 
 Each phase reads the artifacts of the phase before it and produces the artifacts the next phase will read. The chain is what makes the workflow work.
 
 - **Spec** — grills the user (via `/grill-me`) and writes the formal PRD directly from the in-context conversation: user stories (P1/P2/P3), WHEN/THEN/SHALL acceptance criteria, edge cases, NFRs, and traceable requirement IDs. Vagueness is flagged inline (`⚠️ VAGUE`) for the user to catch at sign-off → `spec.md`.
-- **Issues** — runs Plan then Tasks in one phase, with an internal checkpoint between them.
+- **Tasks** — runs Plan then Tasks in one phase, with an internal checkpoint between them.
   - *Plan*: reads `spec.md` (and `CONCERNS.md` if the codebase has one) to decide HOW: architecture, components and interfaces, code-reuse analysis, data models, error handling → `plan.md`.
   - *Tasks*: reads `plan.md`, `spec.md`, and `TESTING.md` (coverage matrix + parallelism + gate commands) to break the work into atomic tasks (What, Where, Depends on, Reuses, Done when, Tests, Gate, Commit) with a parallel-execution plan → `tasks.md`.
 - **Implement** — reads `tasks.md` and executes one task at a time via sub-agents. Each task: RED (write tests from `Done when`) → GREEN (minimum code) → gate check → atomic commit. The main agent never writes production code — it only coordinates, updates `tasks.md` status, and closes requirement IDs in `spec.md`.
@@ -79,7 +79,7 @@ Feature mode is the default workflow to create new features in this craft workfl
 - Each phase cannot be skipped — the chain is what makes the workflow work. The user confirms the final artifact at the end of each phase, then chooses whether to proceed to the next phase.
 - The main agent orchestrates the workflow, but delegates implementation tasks to sub-agents to keep the main context lean and enable parallel execution. The main agent never writes production code — every task is delegated to a sub-agent.
 
-Spec → Issues → Implement → Review
+Spec → Tasks → Implement → Review
 
 **Quick mode (after `Start feature` with mode = quick):**
 
@@ -111,7 +111,7 @@ Describe → Pre-implementation check → Implement → Verify -> Track in STATE
 
 **Target:** <40k tokens total.
 **Reserve:** 160k+ tokens for work, reasoning, outputs.
-**Monitoring:** display status when >40k (see [context-limits.md](helpers/context-limits.md)).
+**Monitoring:** display status when >40k (see [context-limits.md](references/context-limits.md)).
 
 ## Sub-Agent Delegation
 
@@ -155,15 +155,15 @@ The orchestrating agent uses this to update `tasks.md` status, traceability in `
 
 | Trigger Pattern                                                                         | Reference                                                 |
 | --------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| Init project                                                                            | [init.md](references/init.md)                             |
-| Start feature                                                                           | [feature.md](references/feature.md)                       |
-| Start spec                                                                              | [spec.md](references/spec.md)                             |
-| Start issues                                                                            | [issues.md](references/issues.md)                         |
-| Start implement                                                                         | [implement.md](references/implement.md)                   |
-| Start quick mode                                                                        | [quick-mode.md](references/quick-mode.md)                 |
-| Record decision, log blocker, add todo                                                  | [state-management.md](helpers/state-management.md)        |
-| Pause work, end session, create handoff, resume work, continue, load handoff            | [handoff.md](helpers/handoff.md)                          |
-| Review, validate, UAT, walk me through it                                               | [review.md](references/review.md)                         |
+| Init project                                                                            | [init.md](workflow/init/init.md)                          |
+| Start feature                                                                           | [feature.md](workflow/feature/feature.md)                 |
+| Start spec                                                                              | [spec.md](workflow/spec/spec.md)                          |
+| Start tasks                                                                             | [tasks.md](workflow/tasks/tasks.md)                       |
+| Start implement                                                                         | [implement.md](workflow/implement/implement.md)           |
+| Start quick mode                                                                        | [quick-mode.md](workflow/quick-mode/quick-mode.md)        |
+| Record decision, log blocker, add todo                                                  | [state-management.md](references/state-management.md)     |
+| Pause work, end session, create handoff, resume work, continue, load handoff            | [handoff.md](references/handoff.md)                       |
+| Review, validate, UAT, walk me through it                                               | [review.md](workflow/review/review.md)                    |
 
 ---
 
@@ -200,4 +200,4 @@ Step 5: Flag uncertain → "I'm not certain about X — here's my reasoning, but
 
 ## Code Analysis
 
-Use `codenavi` for code analysis. See [code-analysis.md](helpers/code-analysis.md).
+Use `codenavi` for code analysis. See [code-analysis.md](references/code-analysis.md).

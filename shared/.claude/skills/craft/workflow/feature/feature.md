@@ -27,7 +27,7 @@ Entry point for any new work. **The only place in the entire workflow where the 
 
 ## Minimal STATE.md template
 
-Used only when STATE.md does not exist yet. The full structure (Decisions, Blockers, Lessons, Todos, Deferred Ideas) is added lazily by [state-management.md](../helpers/state-management.md) as those events occur — start small.
+Used only when STATE.md does not exist yet. The full structure (Decisions, Blockers, Lessons, Todos, Deferred Ideas) is added lazily by [state-management.md](../../references/state-management.md) as those events occur — start small.
 
 ```markdown
 # State

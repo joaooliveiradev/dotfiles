@@ -79,7 +79,7 @@ If TESTING.md does not exist (greenfield project), use the gate command agreed u
 
 ### 5. Code Quality Check (MANDATORY)
 
-For each changed file, verify against [coding-principles.md](../helpers/coding-principles.md):
+For each changed file, verify against [coding-principles.md](../../references/coding-principles.md):
 
 | Check                                | Pass? |
 | ------------------------------------ | ----- |

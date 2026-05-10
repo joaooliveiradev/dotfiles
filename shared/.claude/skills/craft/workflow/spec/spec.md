@@ -11,7 +11,7 @@ Grill the user about the feature, then write `.specs/features/[slug]/spec.md` �
 3. **Run grill-me.** Invoke the `grill-me` skill with the user's description as context. Don't pass the slug. Don't prescribe stop conditions — grill-me decides when it's done. The full Q&A stays in this conversation.
 4. **Write spec.md.** Write `.specs/features/[slug]/spec.md` using the template below, filled entirely from the grilling conversation. Don't ask the user any clarifying questions while writing — flag gaps inline with `⚠️ VAGUE: [what's unclear]` and surface every flag at the top of the file.
 5. **Sign-off.** Present `spec.md`, surfacing the `⚠️ VAGUE` flags.
-   - **Approved** → ask: *"Can I call Issues now? (y/n)"*. `yes` → invoke `references/issues.md`. Anything else → stop.
+   - **Approved** → ask: *"Can I call Tasks now? (y/n)"*. `yes` → invoke `workflow/tasks/tasks.md`. Anything else → stop.
    - **Rejected** → re-run from step 3 to fill the gaps.
 
 

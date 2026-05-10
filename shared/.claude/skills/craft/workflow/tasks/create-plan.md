@@ -2,8 +2,6 @@
 
 **Goal**: Define HOW to build the feature — architecture, components, what to reuse, data models, error handling — and produce `.specs/features/[slug]/plan.md`.
 
-**Invoked by**: `references/issues.md`. Receives a resolved `[slug]` and an existing `spec.md`.
-
 ## Process
 
 ### 1. Load context

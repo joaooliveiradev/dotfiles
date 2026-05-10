@@ -1,12 +1,10 @@
 # Codebase map
 
-**Invoked by:** `references/init.md` (existing-codebase branch only). Not a user-facing trigger — the user reaches this helper through `/craft init`, never directly.
-
 **Goal:** Understand existing project structure before adding features.
 
 ## Process
 
-`codenavi` is the **primary and only** tool for code exploration in this helper. There is no fallback — do not use `grep`/`find`/`rg` directly, do not write throwaway scripts. See [code-analysis.md](code-analysis.md).
+`codenavi` is the **primary and only** tool for code exploration in this helper. There is no fallback — do not use `grep`/`find`/`rg` directly, do not write throwaway scripts. See [code-analysis.md](../../references/code-analysis.md).
 
 Drive every step below by delegating to `codenavi`:
 
@@ -436,7 +434,7 @@ For each layer, document the required test type, file location pattern, and run 
 
 **Size limit:** 5,000 tokens (~3,000 words)
 
-See [concerns.md](concerns.md) for the full template, guidelines, and examples.
+See [concerns.md](../../references/concerns.md) for the full template, guidelines, and examples.
 
 **Instructions:**
 
