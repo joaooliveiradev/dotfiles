@@ -4,7 +4,7 @@
 
 **Trigger:** "Start quick mode", "Quick fix", "Quick task", "Small change"
 
-**Prerequisite:** `/craft feature` has already been run with mode = `quick`. The slug, the folder `.specs/quick/[slug]/`, and the git branch already exist.
+**Prerequisite:** `/craft feature` has already been run with mode = `quick`. The slug, the folder `.craft/quick/[slug]/`, and the git branch already exist.
 
 ---
 
@@ -12,13 +12,13 @@
 
 ### 1 — Read the active slug from STATE.md
 
-Read `.specs/project/STATE.md` → `Current Feature`. That is the active slug.
+Read `.craft/project/STATE.md` → `Current Feature`. That is the active slug.
 
 - If it is `none` or missing → **stop** and tell the user:
   > "No active feature found. Run `/craft feature` first."
 - Print the resolved slug so the user sees what's active.
 
-Verify `.specs/quick/[slug]/` exists. If it doesn't, stop and tell the user to run `/craft feature` (quick mode) first.
+Verify `.craft/quick/[slug]/` exists. If it doesn't, stop and tell the user to run `/craft feature` (quick mode) first.
 
 ### 2. Describe the Task
 
@@ -27,7 +27,7 @@ User provides a clear, one-sentence description. If vague, ask for specifics:
 - ❌ "Fix the login" → Ask: "What's broken? What should happen instead?"
 - ✅ "Fix: login button returns 401 because token refresh skips expired check"
 
-Once the description is clear, write `.specs/quick/[slug]/TASK.md` using the TASK.md template below. Fill in the description, leave Files Changed / Verification / Commit fields as placeholders — they get filled as later steps complete.
+Once the description is clear, write `.craft/quick/[slug]/TASK.md` using the TASK.md template below. Fill in the description, leave Files Changed / Verification / Commit fields as placeholders — they get filled as later steps complete.
 
 ### 3. Pre-Implementation Check
 
@@ -72,7 +72,7 @@ Examples:
 
 ### 7. Track
 
-Update `.specs/project/STATE.md` with quick task record (see state-management.md Quick Tasks section). Update the TASK.md created in step 2 with the final Files Changed, Verification result, and commit hash. Write `.specs/quick/[slug]/SUMMARY.md` from the SUMMARY.md template below — short bullets of what was done plus the commit hash.
+Update `.craft/project/STATE.md` with quick task record (see state-management.md Quick Tasks section). Update the TASK.md created in step 2 with the final Files Changed, Verification result, and commit hash. Write `.craft/quick/[slug]/SUMMARY.md` from the SUMMARY.md template below — short bullets of what was done plus the commit hash.
 
 ---
 
@@ -81,7 +81,7 @@ Update `.specs/project/STATE.md` with quick task record (see state-management.md
 Quick tasks live separately from planned features:
 
 ```
-.specs/
+.craft/
 └── quick/
     └── [slug]/
         ├── TASK.md       # Description + verification

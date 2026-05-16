@@ -35,7 +35,7 @@ Focus on concerns that could cause real damage — data loss, security breaches,
 
 ---
 
-## Template: `.specs/codebase/CONCERNS.md`
+## Template: `.craft/codebase/CONCERNS.md`
 
 **Size limit:** 5,000 tokens (~3,000 words)
 
@@ -186,7 +186,7 @@ _Update as issues are fixed or new ones discovered_
 
 CONCERNS.md is **on-demand context**, not auto-loaded (see SKILL.md → Context Loading Strategy). It enters the workflow at specific phases:
 
-- **Init (brownfield):** Generated as one of the 7 codebase docs by `workflow/init/codebase-map.md`.
+- **Init (brownfield):** Generated as one of the 6 evidence-based codebase docs by `workflow/init/bootstrap-brownfield.md` (which is invoked by `workflow/init/bootstrap.md`).
 - **Plan:** `workflow/tasks/create-plan.md` reads CONCERNS.md when present. Any flagged component the feature touches must be addressed in the plan — fragile areas get explicit handling, fix approaches inform component design, test coverage gaps inform what tests the plan demands.
 - **Tasks:** Constraints from the plan flow into individual tasks. Sub-agents executing a task receive the relevant CONCERNS.md excerpt only when the task definition references a flagged area — they do not load the full file.
 - **Updates:** Anyone may add or amend a concern when a session uncovers new evidence (a bug investigation, a fragility hit during implementation). Treat it as living documentation; do not let entries rot.

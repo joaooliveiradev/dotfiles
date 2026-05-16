@@ -1,6 +1,6 @@
-# Codebase map
+# Bootstrap (brownfield)
 
-**Goal:** Understand existing project structure before adding features.
+**Goal:** Extract 6 evidence-based codebase docs from an existing codebase.
 
 ## Process
 
@@ -9,11 +9,10 @@
 Drive every step below by delegating to `codenavi`:
 
 1. Explore directory structure systematically
-2. Identify technology stack from dependency manifests
-3. Extract patterns from representative code samples
-4. Document observed conventions and architectures
-5. Catalog external integrations
-6. Identify concerns: tech debt, known bugs, security risks, performance bottlenecks, fragile areas
+2. Extract patterns from representative code samples
+3. Document observed conventions and architectures
+4. Catalog external integrations
+5. Identify concerns: tech debt, known bugs, security risks, performance bottlenecks, fragile areas
 
 **Analysis depth:**
 
@@ -21,75 +20,11 @@ Drive every step below by delegating to `codenavi`:
 - Focus on consistency and patterns, not exhaustive coverage
 - Extract actual examples verbatim from codenavi output, not assumptions
 
-## Output: 7 Files in .specs/codebase/
+## Output: 6 Files in .craft/codebase/
 
 ---
 
-### 1. STACK.md
-
-**Purpose:** Document technology stack and dependencies.
-
-**Size limit:** 2,000 tokens (~1,200 words)
-
-**Extract from:**
-
-- Dependency manifest files
-- Build configuration
-- Runtime configuration
-
-**Document:**
-
-```markdown
-# Tech Stack
-
-**Analyzed:** [date]
-
-## Core
-
-- Framework: [detected name + version]
-- Language: [detected name + version]
-- Runtime: [detected name + version]
-- Package manager: [detected manager]
-
-## Frontend (if applicable)
-
-- UI Framework: [name + version]
-- Styling: [approach + tools]
-- State Management: [library/pattern]
-- Form Handling: [library if present]
-
-## Backend (if applicable)
-
-- API Style: [REST/GraphQL/gRPC + framework]
-- Database: [ORM/query builder + database system]
-- Authentication: [library/approach]
-
-## Testing
-
-- Unit: [framework]
-- Integration: [framework]
-- E2E: [framework if present]
-
-## External Services
-
-- [Category]: [Service name]
-- [Category]: [Service name]
-
-## Development Tools
-
-- [Tool category]: [Tool name]
-```
-
-**Instructions:**
-
-- Extract from actual dependency files
-- Include versions for major dependencies
-- Categorize by purpose
-- Note testing frameworks explicitly
-
----
-
-### 2. ARCHITECTURE.md
+### 1. ARCHITECTURE.md
 
 **Purpose:** Document architectural patterns and data flow.
 
@@ -155,7 +90,7 @@ Drive every step below by delegating to `codenavi`:
 
 ---
 
-### 3. CONVENTIONS.md
+### 2. CONVENTIONS.md
 
 **Purpose:** Document code style and naming conventions.
 
@@ -225,7 +160,7 @@ Examples: [actual constant names]
 
 ---
 
-### 4. STRUCTURE.md
+### 3. STRUCTURE.md
 
 **Purpose:** Document directory layout and file organization.
 
@@ -282,7 +217,7 @@ Examples: [actual constant names]
 
 ---
 
-### 5. TESTING.md
+### 4. TESTING.md
 
 **Purpose:** Document testing infrastructure and patterns.
 
@@ -372,7 +307,7 @@ For each layer, document the required test type, file location pattern, and run 
 
 ---
 
-### 6. INTEGRATIONS.md
+### 5. INTEGRATIONS.md
 
 **Purpose:** Document external service integrations.
 
@@ -428,7 +363,7 @@ For each layer, document the required test type, file location pattern, and run 
 
 ---
 
-### 7. CONCERNS.md
+### 6. CONCERNS.md
 
 **Purpose:** Surface actionable warnings about the codebase — tech debt, known bugs, security gaps, performance bottlenecks, fragile areas, scaling limits, risky dependencies, missing features, and test coverage gaps.
 
@@ -448,6 +383,6 @@ See [concerns.md](../../references/concerns.md) for the full template, guideline
 
 ## Total Context Budget
 
-**Combined:** ~19,000 tokens (10% of context window)
+**Combined:** ~17,000 tokens (~9% of context window)
 **Acceptable for:** Brownfield projects requiring codebase understanding
 **Loading strategy:** Load relevant docs on-demand based on task

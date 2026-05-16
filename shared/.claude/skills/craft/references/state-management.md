@@ -4,7 +4,7 @@
 
 ## Structure
 
-**Output:** `.specs/project/STATE.md`
+**Output:** `.craft/project/STATE.md`
 
 ```markdown
 # State

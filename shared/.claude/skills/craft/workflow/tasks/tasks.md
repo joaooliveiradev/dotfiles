@@ -1,26 +1,26 @@
 # Craft — Tasks
 
-**Goal**: Produce `.specs/features/[slug]/plan.md` and `.specs/features/[slug]/tasks.md` by chaining Plan and Tasks behind a single phase.
+**Goal**: Produce `.craft/features/[slug]/plan.md` and `.craft/features/[slug]/tasks.md` by chaining Plan and Tasks behind a single phase.
 
 ## Process
 
 ### 1 — Read the active slug from STATE.md
 
-Read `.specs/project/STATE.md` → `Current Feature`. That is the active slug.
+Read `.craft/project/STATE.md` → `Current Feature`. That is the active slug.
 
 - If it is `none` or missing → **stop** and tell the user:
   > "No active feature found. Run `/craft feature` first."
 - Print the resolved slug so the user sees what's active.
 
-Open the feature folder at `.specs/features/[slug]/`. `spec.md` must exist there — if not, stop and tell the user to run `Start spec` first. If `plan.md` or `tasks.md` already exist, the user may be iterating — ask whether to overwrite or push more content into them.
+Open the feature folder at `.craft/features/[slug]/`. `spec.md` must exist there — if not, stop and tell the user to run `Start spec` first. If `plan.md` or `tasks.md` already exist, the user may be iterating — ask whether to overwrite or push more content into them.
 
 ### 2 — Run Plan
 
-Run `workflow/tasks/create-plan.md` with the resolved slug. It produces `.specs/features/[slug]/plan.md` and returns.
+Run `workflow/tasks/create-plan.md` with the resolved slug. It produces `.craft/features/[slug]/plan.md` and returns.
 
 ### 3 — Run Tasks
 
-Run `workflow/tasks/create-tasks.md` with the resolved slug. It produces `.specs/features/[slug]/tasks.md` and returns.
+Run `workflow/tasks/create-tasks.md` with the resolved slug. It produces `.craft/features/[slug]/tasks.md` and returns.
 
 ### 4 — Sign-off
 
@@ -36,7 +36,7 @@ Present `tasks.md` to the user along with the three validation tables, then ask:
 - **One checkpoint, at the end.** Plan and Tasks run back-to-back. The user signs off on `tasks.md` only.
 - **Spec is the contract.** Plan and Tasks both read `spec.md` as the source of truth. If something is missing or vague there, bounce to Spec — don't patch inside this phase.
 - **Helpers do the work.** This wrapper orchestrates only. Architecture analysis lives in `workflow/tasks/create-plan.md`; task decomposition and validation gates live in `workflow/tasks/create-tasks.md`.
-- **Both artifacts persist.** `plan.md` and `tasks.md` both live in `.specs/features/[slug]/`. Implement and Review may read either.
+- **Both artifacts persist.** `plan.md` and `tasks.md` both live in `.craft/features/[slug]/`. Implement and Review may read either.
 
 ## Tips
 

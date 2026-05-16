@@ -1,12 +1,12 @@
 # Craft — Plan
 
-**Goal**: Define HOW to build the feature — architecture, components, what to reuse, data models, error handling — and produce `.specs/features/[slug]/plan.md`.
+**Goal**: Define HOW to build the feature — architecture, components, what to reuse, data models, error handling — and produce `.craft/features/[slug]/plan.md`.
 
 ## Process
 
 ### 1. Load context
 
-Load `.specs/features/[slug]/spec.md` before planning. The grilling Q&A that produced spec.md is the design intent — anything that isn't in spec.md needs verification through the knowledge chain, not invention.
+Load `.craft/features/[slug]/spec.md` before planning. The grilling Q&A that produced spec.md is the design intent — anything that isn't in spec.md needs verification through the knowledge chain, not invention.
 
 **CRITICAL: NEVER assume or fabricate information.** If you cannot find an answer through the knowledge verification chain, explicitly say "I don't know" or "I couldn't find documentation for this". Inventing an API, a pattern, or a behavior that doesn't exist is far worse than admitting uncertainty. Wrong assumptions propagate through plan → tasks → implementation and cause cascading failures.
 
@@ -18,7 +18,7 @@ Overview of how components interact. Use mermaid diagrams when helpful. Before c
 
 **CRITICAL**: What existing code can we leverage? This saves tokens and reduces errors.
 
-If `.specs/codebase/CONCERNS.md` exists, check it before planning. Any component flagged as fragile, carrying tech debt, or having test coverage gaps requires extra care in the plan document.
+If `.craft/codebase/CONCERNS.md` exists, check it before planning. Any component flagged as fragile, carrying tech debt, or having test coverage gaps requires extra care in the plan document.
 
 ### 4. Define Components and Interfaces
 
@@ -30,16 +30,16 @@ If the feature involves data, define models before implementation.
 
 ### 6. Write plan.md
 
-Write `.specs/features/[slug]/plan.md` using the template below.
+Write `.craft/features/[slug]/plan.md` using the template below.
 
 ---
 
-## Template: `.specs/features/[slug]/plan.md`
+## Template: `.craft/features/[slug]/plan.md`
 
 ````markdown
 # [Feature] Plan
 
-**Spec**: `.specs/features/[slug]/spec.md`
+**Spec**: `.craft/features/[slug]/spec.md`
 **Status**: Draft | Approved
 
 ---

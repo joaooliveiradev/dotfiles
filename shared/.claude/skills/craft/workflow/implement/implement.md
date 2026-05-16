@@ -14,6 +14,8 @@ This is where code gets written. Every task follows the same cycle: pick → sta
 2. **Files to touch** - List ONLY files this task requires
 3. **Success criteria** - How will I verify this works?
 
+**Also read every `.md` file in `.craft/standards/`** (if the folder exists and is non-empty). These are framework/library idioms for this project's stack (e.g., React Router v7, Tailwind) — apply them when writing code. If the folder is missing or empty, skip silently.
+
 ⚠️ **Do not proceed without stating these explicitly.**
 
 ---
@@ -21,20 +23,21 @@ This is where code gets written. Every task follows the same cycle: pick → sta
 ## Process
 
 **Sub-agent context:** When this task is executed by a sub-agent, the sub-agent receives
-the task definition, coding principles, TESTING.md, and relevant spec/design context.
+the task definition, coding principles, standards from `.craft/standards/*.md` (if present),
+TESTING.md, and relevant spec/design context.
 All steps below apply identically whether running in the main context or a sub-agent.
 The only difference: sub-agents report results back to the orchestrator rather than
 continuing to the next task.
 
 ### 1 — Read the active slug from STATE.md
 
-Read `.specs/project/STATE.md` → `Current Feature`. That is the active slug.
+Read `.craft/project/STATE.md` → `Current Feature`. That is the active slug.
 
 - If it is `none` or missing → **stop** and tell the user:
   > "No active feature found. Run `/craft feature` first."
 - Print the resolved slug so the user sees what's active.
 
-Open the feature folder at `.specs/features/[slug]/`. `tasks.md` must exist there — if not, stop and tell the user to run `/craft tasks` first.
+Open the feature folder at `.craft/features/[slug]/`. `tasks.md` must exist there — if not, stop and tell the user to run `/craft tasks` first.
 
 ### 2. Pick Task
 

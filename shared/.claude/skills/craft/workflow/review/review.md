@@ -6,13 +6,13 @@
 
 ## Resolve the slug
 
-Read `.specs/project/STATE.md` → `Current Feature`. That is the active slug.
+Read `.craft/project/STATE.md` → `Current Feature`. That is the active slug.
 
 - If it is `none` or missing → **stop** and tell the user:
   > "No active feature found. Run `/craft feature` first."
 - Print the resolved slug on every invocation so the user sees what's active.
 
-Then read `.specs/features/[slug]/spec.md`, `plan.md`, `tasks.md` to drive the rest of this skill.
+Then read `.craft/features/[slug]/spec.md`, `plan.md`, `tasks.md` to drive the rest of this skill.
 
 ---
 
@@ -149,7 +149,7 @@ Fix tasks follow the same format as regular tasks and can be executed with the i
 # [Feature] Validation
 
 **Date**: [YYYY-MM-DD]
-**Spec**: `.specs/features/[slug]/spec.md`
+**Spec**: `.craft/features/[slug]/spec.md`
 
 ---
 

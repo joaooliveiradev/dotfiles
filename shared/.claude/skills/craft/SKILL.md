@@ -34,11 +34,11 @@ Each phase reads the artifacts of the phase before it and produces the artifacts
 
 ## Project Structure
 ```
-.specs/
+.craft/
 ├── project/
 │   ├── PROJECT.md      # Vision & goals
 │   └── STATE.md        # Memory: current feature, decisions, blockers, lessons, todos, deferred ideas
-├── codebase/           # Brownfield docs (existing codebases)
+├── codebase/           # Project docs
 │   ├── STACK.md
 │   ├── ARCHITECTURE.md
 │   ├── CONVENTIONS.md
@@ -46,6 +46,7 @@ Each phase reads the artifacts of the phase before it and produces the artifacts
 │   ├── TESTING.md      # Coverage matrix, parallelism, gate commands
 │   ├── INTEGRATIONS.md
 │   └── CONCERNS.md
+├── standards/          # Stack-matched library packs (optional, copied from ~/.claude/standards/)
 ├── features/
 │   └── [slug]/
 │       ├── spec.md # Requirements with traceable IDs
@@ -63,19 +64,19 @@ Each phase reads the artifacts of the phase before it and produces the artifacts
 
 **Once per project — `Init project`:**
 
-- New project → scaffold `.specs/`, write `PROJECT.md`. No codebase-map, no `TESTING.md`. `STATE.md` is created later by `Start feature`.
-- Existing codebase → scaffold `.specs/`, write `PROJECT.md`, then run `codebase-map` to derive the 7 brownfield docs (including `TESTING.md`).
+- New project → scaffold `.craft/`, write `PROJECT.md` and `STACK.md` (derived from interview). If matching packs exist in `~/.claude/standards/`, populate `.craft/standards/`. No `TESTING.md`. `STATE.md` is created later by `Start feature`.
+- Existing codebase → scaffold `.craft/`, write `PROJECT.md`, extract `STACK.md` from manifests, then run `bootstrap-brownfield` to derive 6 more evidence-based docs (including `TESTING.md`). If matching packs exist in `~/.claude/standards/`, populate `.craft/standards/`.
 
 **Per feature — `Start feature` first, always:**
 
-`Start feature` is the only place that asks for a slug. It asks "spec or quick mode?", asks for the slug, creates `STATE.md` (if missing) with the slug as `Current Feature`, creates the feature folder (`.specs/features/[slug]/` or `.specs/quick/[slug]/`), and creates the git branch. Every downstream phase reads the slug from `STATE.md` — no other skill ever asks for it.
+`Start feature` is the only place that asks for a slug. It asks "spec or quick mode?", asks for the slug, creates `STATE.md` (if missing) with the slug as `Current Feature`, creates the feature folder (`.craft/features/[slug]/` or `.craft/quick/[slug]/`), and creates the git branch. Every downstream phase reads the slug from `STATE.md` — no other skill ever asks for it.
 
 **Feature Mode (after `Start feature` with mode = spec):**
 
 Feature mode is the default workflow to create new features in this craft workflow.
 
 - Trigger the Spec phase with `Start spec`. The slug comes from `STATE.md`.
-- Each phase produces artifacts in `.specs/features/[slug]/` that the next phase reads.
+- Each phase produces artifacts in `.craft/features/[slug]/` that the next phase reads.
 - Each phase cannot be skipped — the chain is what makes the workflow work. The user confirms the final artifact at the end of each phase, then chooses whether to proceed to the next phase.
 - The main agent orchestrates the workflow, but delegates implementation tasks to sub-agents to keep the main context lean and enable parallel execution. The main agent never writes production code — every task is delegated to a sub-agent.
 
@@ -102,6 +103,7 @@ Describe → Pre-implementation check → Implement → Verify -> Track in STATE
 - spec.md (when working on specific feature)
 - plan.md (when implementing from plan)
 - tasks.md (when executing tasks)
+- standards/*.md (when implementing — framework idioms for the project stack)
 
 **Never load simultaneously:**
 
@@ -185,7 +187,7 @@ When planning, tasking, implementing, or reviewing, follow this chain to verify 
 
 ```
 Step 1: Codebase       → check existing code, conventions, and patterns
-Step 2: Project docs   → README, docs/, inline comments, .specs/codebase/
+Step 2: Project docs   → README, docs/, inline comments, .craft/codebase/
 Step 3: MCP / tools    → resolve library IDs, query for current API/patterns
 Step 4: Web search     → official docs, reputable sources, community patterns
 Step 5: Flag uncertain → "I'm not certain about X — here's my reasoning, but verify"

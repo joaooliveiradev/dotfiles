@@ -1,6 +1,6 @@
 # Tasks
 
-**Goal**: Break the plan into GRANULAR, ATOMIC tasks. Clear dependencies. Right tools. Parallel execution plan. Produce `.specs/features/[slug]/tasks.md`. Reads `plan.md`, `spec.md`, and `.specs/codebase/TESTING.md`.
+**Goal**: Break the plan into GRANULAR, ATOMIC tasks. Clear dependencies. Right tools. Parallel execution plan. Produce `.craft/features/[slug]/tasks.md`. Reads `plan.md`, `spec.md`, and `.craft/codebase/TESTING.md`.
 
 ## Why Granular Tasks?
 
@@ -37,11 +37,11 @@
 
 ### 1. Review Plan
 
-Read `.specs/features/[slug]/plan.md` before creating tasks.
+Read `.craft/features/[slug]/plan.md` before creating tasks.
 
 ### 1.5. Load Test Coverage Matrix
 
-Read `.specs/codebase/TESTING.md` (if it exists) before creating tasks. The Test Coverage Matrix
+Read `.craft/codebase/TESTING.md` (if it exists) before creating tasks. The Test Coverage Matrix
 and Parallelism Assessment drive two critical decisions:
 
 **Co-located tests:** Every task that creates or modifies a code layer with a required test type
@@ -92,16 +92,16 @@ Before returning tasks to the wrapper, run ALL three pre-approval checks. These 
 
 ### 6. Write tasks.md
 
-Write `.specs/features/[slug]/tasks.md` along with all three validation tables.
+Write `.craft/features/[slug]/tasks.md` along with all three validation tables.
 
 ---
 
-## Template: `.specs/features/[slug]/tasks.md`
+## Template: `.craft/features/[slug]/tasks.md`
 
 ```markdown
 # [Feature] Tasks
 
-**Plan**: `.specs/features/[slug]/plan.md`
+**Plan**: `.craft/features/[slug]/plan.md`
 **Status**: Draft | Approved | In Progress | Done
 
 ---
