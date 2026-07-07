@@ -5,8 +5,6 @@
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source /usr/share/nvm/init-nvm.sh
-# Start ASDF
-. /home/joaooliveiradev/dev/asdf-vm/pkg/asdf-vm/opt/asdf-vm/asdf.sh
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -44,3 +42,6 @@ function delete-branches () {
 export PATH=$HOME/.local/bin:$PATH
 
 export SSH_AUTH_SOCK=$HOME/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
+
+# Mise
+eval "$(~/.local/bin/mise activate zsh)"

@@ -40,7 +40,6 @@
       "Write(~/.config/**)"
     ]
   },
-  "model": "opus",
   "hooks": {
     "PreToolUse": [
       {
@@ -87,6 +86,26 @@
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
   },
+  "enabledPlugins": {
+    "figma@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "impeccable@impeccable": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "impeccable": {
+      "source": {
+        "source": "github",
+        "repo": "pbakaus/impeccable"
+      }
+    }
+  },
   "theme": "auto",
-  "autoCompactEnabled": false
+  "autoCompactEnabled": false,
+  "effortLevel": "high"
 }

@@ -1,4 +1,9 @@
 {
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
   "cli_default_open_behavior": "new_window",
   "minimum_split_diff_width": 99.0,
   "disable_ai": false,
@@ -24,7 +29,7 @@
   "theme": {
     "mode": "dark",
     "light": "poimandres",
-    "dark": "One Dark",
+    "dark": "VSCode Dark Modern",
   },
   // TOOLBAR
   "toolbar": {
