@@ -90,8 +90,31 @@
   "window.zoomLevel": -1,
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:gpt-4.1",
-  "workbench.colorTheme": "poimandres",
-  "typescript.updateImportsOnFileMove.enabled": "never",
   "diffEditor.ignoreTrimWhitespace": false,
-  "workbench.sideBar.location": "right"
+  "workbench.sideBar.location": "right",
+  "claudeCode.preferredLocation": "panel",
+  "workbench.preferredHighContrastColorTheme": "Dark Modern",
+  // ELIXIR
+  "elixirLS.suggestSpecs": false,
+  "elixirLS.dialyzerEnabled": true,
+  "elixirLS.signatureAfterComplete": false,
+  "elixirLS.fetchDeps": false,
+  "files.associations": {
+    "*.heex": "phoenix-heex"
+  },
+  "[elixir]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "JakeBecker.elixir-ls"
+  },
+  "[phoenix-heex]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "JakeBecker.elixir-ls"
+  },
+  "emmet.includeLanguages": {
+    "elixir": "html",
+    "phoenix-heex": "html",
+   "html-eex": "html"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "workbench.colorTheme": "Elixir Dark"
 }
