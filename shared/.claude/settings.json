@@ -29,7 +29,20 @@
       "Bash(dd:*)",
       "Bash(mkfs:*)",
       "Bash(shutdown:*)",
-      "Bash(reboot:*)"
+      "Bash(reboot:*)",
+      "EnterPlanMode",
+      "ExitPlanMode",
+      "DesignSync",
+      "NotebookEdit",
+      "SendMessage",
+      "PushNotification",
+      "RemoteTrigger",
+      "ReportFindings",
+      "ScheduleWakeup",
+      "AskUserQuestion",
+      "CronCreate",
+      "CronDelete",
+      "CronList"
     ],
     "ask": [
       "Bash(git push:*)",
@@ -40,6 +53,7 @@
       "Write(~/.config/**)"
     ]
   },
+  "model": "opus[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -87,9 +101,8 @@
     "command": "bash ~/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
-    "figma@claude-plugins-official": true,
-    "context7@claude-plugins-official": true,
-    "impeccable@impeccable": true
+    "figma@claude-plugins-official": false,
+    "context7@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -97,15 +110,15 @@
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
       }
-    },
-    "impeccable": {
-      "source": {
-        "source": "github",
-        "repo": "pbakaus/impeccable"
-      }
     }
   },
+  "effortLevel": "xhigh",
+  "tui": "fullscreen",
   "theme": "auto",
   "autoCompactEnabled": false,
-  "effortLevel": "high"
+  "disableBundledSkills": true,
+  "disableWorkflows": true,
+  "disableRemoteControl": true,
+  "disableClaudeAiConnectors": true,
+  "disableArtifact": true
 }
