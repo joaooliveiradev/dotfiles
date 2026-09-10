@@ -1,3 +1,4 @@
+import = ["~/.config/alacritty/themes/poimandres.toml"]
 
 [cursor]
 style = "Beam"
@@ -36,10 +37,6 @@ lines = 30
 [window.padding]
 x = 15
 y = 15
-
-[general]
-live_config_reload = true
-import = ["~/.config/alacritty/themes/poimandres.toml"]
 
 [[keyboard.bindings]]
 key = "Return"

@@ -1,47 +1,57 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# ==============================================================================
+# ~/.zshrc — João Victor
+# Dotfiles compartilhado entre máquinas (Manjaro / Zorin)
+# ==============================================================================
 
-# Start NVM
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# ------------------------------------------------------------------------------
+# PATH & Environment
+# ------------------------------------------------------------------------------
+export PATH="$HOME/.local/bin:$PATH"
 
-source /usr/share/nvm/init-nvm.sh
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# ZSH THEME
-ZSH_THEME="robbyrussell"
-
-# Execute some shell comands
-source $ZSH/oh-my-zsh.sh
-
-# Plugins
-plugins=(
-    git
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    fzf
-)
-
-# Alias
-
-# bun completions
-[ -s "/home/joaooliveiradev/.bun/_bun" ] && source "/home/joaooliveiradev/.bun/_bun"
-
-# bun
+# Bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# Deletar branches diferente de main, staging e dev / develop
-function delete-branches () {
+# SSH agent do Bitwarden
+export SSH_AUTH_SOCK="$HOME/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock"
+
+# ------------------------------------------------------------------------------
+# Oh My Zsh
+# ------------------------------------------------------------------------------
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="robbyrussell"
+
+# IMPORTANTE: o array `plugins` precisa vir ANTES do source do oh-my-zsh.sh,
+# senão nenhum plugin é carregado.
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  fzf
+)
+
+source "$ZSH/oh-my-zsh.sh"
+
+# ------------------------------------------------------------------------------
+# Tool integrations
+# ------------------------------------------------------------------------------
+# nvm — só existe no Manjaro/Arch; no Zorin o caminho não existe, então o guard
+# evita erro na inicialização do shell.
+[ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
+
+# mise — gerenciador de versões (node, etc.)
+eval "$(~/.local/bin/mise activate zsh)"
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# ------------------------------------------------------------------------------
+# Aliases & Functions
+# ------------------------------------------------------------------------------
+# Deleta branches locais que não sejam main / staging / dev / develop
+delete-branches() {
   for i in $(git branch | grep -v -E -w '(main|staging|dev|develop)$'); do
     git branch -D "$i"
   done
 }
-
-export PATH=$HOME/.local/bin:$PATH
-
-export SSH_AUTH_SOCK=$HOME/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
-
-# Mise
-eval "$(~/.local/bin/mise activate zsh)"

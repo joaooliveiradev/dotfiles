@@ -1,5 +1,4 @@
 [
-	// Vim mode enhancements
 	{
 		"context": "Editor && vim_mode == insert",
 		"bindings": {
@@ -7,7 +6,6 @@
 		}
 	},
 
-	// Standard editor keybindings (work in all modes)
 	{
 		"context": "Editor && !menu",
 		"bindings": {
@@ -27,7 +25,6 @@
 		}
 	},
 
-	// Dock/Panel toggles (work in all modes)
 	{
 		"context": "Workspace",
 		"bindings": {
@@ -39,7 +36,6 @@
 		}
 	},
 
-	// Copy/paste/cut (if you want standard behavior)
 	{
 		"context": "Editor && vim_mode == insert",
 		"bindings": {
@@ -66,7 +62,6 @@
 		}
 	},
 
-	// Tasks
 	{
 		"context": "Workspace",
 		"bindings": {
