@@ -34,8 +34,8 @@
   },
   "theme": {
     "mode": "dark",
-    "light": "VSCode Dark Modern",
-    "dark": "VSCode Dark Modern",
+    "light": "One Light",
+    "dark": "One Dark",
   },
   // TOOLBAR
   "toolbar": {

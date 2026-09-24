@@ -44,8 +44,9 @@ window-height = 26
 
 # ghostty +list-themes
 
-theme = dark:Catppuccin Frappe,light:Catppuccin Latte
-
+window-theme = ghostty
+# theme = dark:tokyonight-storm,light:tokyonight-day
+theme = dark:Poimandres,light:Poimandres White
 
 # -------------------- SHELL INTEGRATION --------------------
 # ssh-terminfo fixes the classic "unknown terminal type: xterm-ghostty" on remote hosts.
