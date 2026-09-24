@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Devilspie2
+Comment=Apply window rules on open
+Exec=devilspie2
+X-GNOME-Autostart-enabled=true
+NoDisplay=true

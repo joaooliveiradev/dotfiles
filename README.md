@@ -1,6 +1,13 @@
 ## Dotfiles
 
-My configuration files for alacritty, i3, picom, polybar, zsh and more.
+My configuration files for Zorin OS: ghostty, zsh, zed, vscode and Claude Code.
+
+### Install
+
+```sh
+./install.sh        # create symlinks
+./install.sh clean  # remove them
+```
 
 ### Requirements
 

@@ -1,87 +1,64 @@
 #!/usr/bin/env bash
 set -e
 
-# -------------------- MAIN FUNCTION --------------------
-main(){
-selectedProfile="$1"
-dotfilesPath="$PWD"
+dotfilesPath="$(cd "$(dirname "$0")" && pwd)/zorin"
 
-if [[ "$selectedProfile" == "clean" ]]; then
-    clearAllLinks
-    exit 0
-fi
+# Links target -> source, backing up real files/dirs that are in the way
+link() {
+    local source="$1"
+    local target="$2"
 
-if [[ "$selectedProfile" != "manjaro" ]] && [[ "$selectedProfile" != "zorin" ]]; then
-    echo "Invalid profile"
-    echo "Use: ./install.sh <manjaro|zorin>"
-    exit 1
-fi
+    mkdir -p "$(dirname "$target")"
 
-echo "You selected $selectedProfile"
+    if [ -L "$target" ]; then
+        rm "$target"
+    elif [ -e "$target" ]; then
+        mv "$target" "$target.bak.$(date +%s)"
+    fi
 
-# -------------------- SHARED PACKAGES --------------------
-rm -rf ~/.config/alacritty
-ln -s "$dotfilesPath/shared/alacritty" ~/.config/alacritty
-
-rm -rf ~/.zshrc
-ln -s "$dotfilesPath/shared/zsh/.zshrc" ~/.zshrc
-
-rm -rf ~/.config/zed
-ln -s "$dotfilesPath/shared/zed" ~/.config/zed
-
-if [ -L ~/.claude ]; then
-    rm ~/.claude
-elif [ -d ~/.claude ]; then
-    mv ~/.claude "$HOME/.claude.bak.$(date +%s)"
-fi
-ln -s "$dotfilesPath/shared/.claude" ~/.claude
-
-# -------------------- MANJARO PACKAGES --------------------
-
-if [[ "$selectedProfile" == "manjaro" ]]; then
-    echo "Adding manjaro symbolic links"
-
-    rm -rf ~/.config/rofi
-    ln -s "$dotfilesPath/profiles/manjaro/rofi" ~/.config/rofi
-
-    rm -rf ~/.config/i3
-    ln -s "$dotfilesPath/profiles/manjaro/i3" ~/.config/i3
-
-    rm -rf ~/.config/polybar
-    ln -s "$dotfilesPath/profiles/manjaro/polybar" ~/.config/polybar
-
-    rm -rf ~/.config/picom
-    ln -s "$dotfilesPath/profiles/manjaro/picom" ~/.config/picom
-
-    rm -rf ~/.config/Code/User/settings.json
-    ln -s "$dotfilesPath/profiles/manjaro/vscode/settings.json" ~/.config/Code/User/settings.json
-
-    rm -rf ~/.config/wallpapers
-    ln -s "$dotfilesPath/shared/wallpapers" ~/.config/wallpapers
-fi
-
-# -------------------- ZORIN PACKAGES --------------------
-
-if [[ "$selectedProfile" == "zorin" ]]; then
-    echo "Adding zorin symbolic links"
-fi
+    ln -s "$source" "$target"
+    echo "  $target -> $source"
 }
 
+# -------------------- MAIN FUNCTION --------------------
+main() {
+    if [[ "$1" == "clean" ]]; then
+        clearAllLinks
+        exit 0
+    fi
+
+    echo "Adding zorin symbolic links"
+
+    link "$dotfilesPath/ghostty" ~/.config/ghostty
+    link "$dotfilesPath/zsh/.zshrc" ~/.zshrc
+    link "$dotfilesPath/mise/config.toml" ~/.config/mise/config.toml
+    link "$dotfilesPath/zed" ~/.config/zed
+    link "$dotfilesPath/devilspie2" ~/.config/devilspie2
+    link "$dotfilesPath/autostart/devilspie2.desktop" ~/.config/autostart/devilspie2.desktop
+    link "$dotfilesPath/vscode/settings.json" ~/.config/Code/User/settings.json
+    link "$dotfilesPath/vscode/keybidings.json" ~/.config/Code/User/keybindings.json
+
+    # Claude: only link versioned items; runtime data (credentials, sessions, history) stays in ~/.claude
+    if [ -L ~/.claude ]; then
+        rm ~/.claude
+    fi
+    mkdir -p ~/.claude
+    for item in settings.json CLAUDE.md skills hooks agents commands statusline-command.sh; do
+        [ -e "$dotfilesPath/.claude/$item" ] && link "$dotfilesPath/.claude/$item" ~/.claude/"$item"
+    done
+}
 
 # -------------------- CLEAN FUNCTION --------------------
 clearAllLinks() {
     echo "Removing created symlinks..."
 
-    rm -rf ~/.config/alacritty
-    rm -rf ~/.zshrc
-    rm -rf ~/.config/zed
-    [ -L ~/.claude ] && rm ~/.claude
-    rm -rf ~/.config/rofi
-    rm -rf ~/.config/i3
-    rm -rf ~/.config/polybar
-    rm -rf ~/.config/picom
-    rm -rf ~/.config/Code/User/settings.json
+    for target in ~/.config/ghostty ~/.zshrc ~/.config/mise/config.toml ~/.config/zed \
+        ~/.config/devilspie2 ~/.config/autostart/devilspie2.desktop \
+        ~/.config/Code/User/settings.json ~/.config/Code/User/keybindings.json \
+        ~/.claude/{settings.json,CLAUDE.md,skills,hooks,agents,commands,statusline-command.sh}; do
+        [ -L "$target" ] && rm "$target"
+    done
+    return 0
 }
 
-# Execute main function first
 main "$@"

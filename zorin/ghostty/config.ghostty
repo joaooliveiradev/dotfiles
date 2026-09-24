@@ -1,0 +1,69 @@
+# Ghostty configuration
+# Docs: `ghostty +show-config --default --docs`
+# Reload in-place with ctrl+shift+, / open this file with ctrl+,
+
+
+
+# -------------------- FONT --------------------
+
+# ghostty +list-fonts
+
+font-family = JetBrains Mono
+font-size = 16
+
+# Breathing room between lines. Biggest single readability win.
+adjust-cell-height = 12%
+
+# JetBrains Mono ships programming ligatures (-> => !== etc). Uncomment to kill them.
+# font-feature = -liga, -calt, -dlig
+
+# -------------------- CURSOR --------------------
+cursor-style = bar
+cursor-style-blink = false
+
+# -------------------- MOUSE --------------------
+
+mouse-hide-while-typing = true
+
+# -------------------- WINDOW --------------------
+
+# window-decoration = none
+window-padding-x = 15
+window-padding-y = 15
+window-padding-balance = true
+window-padding-color = extend
+background-opacity = 0.99
+background-blur-radius = 10
+
+
+# Initial window size, in cells.
+window-width = 115
+window-height = 26
+
+# -------------------- THEME --------------------
+
+# ghostty +list-themes
+
+theme = dark:Catppuccin Frappe,light:Catppuccin Latte
+
+
+# -------------------- SHELL INTEGRATION --------------------
+# ssh-terminfo fixes the classic "unknown terminal type: xterm-ghostty" on remote hosts.
+# sudo keeps terminfo across sudo. Both are OFF by default.
+shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo,path
+
+# -------------------- KEYBINDS --------------------
+# Clipboard
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+
+# Font size
+keybind = ctrl+==increase_font_size:1
+keybind = ctrl+-=decrease_font_size:1
+keybind = ctrl+0=reset_font_size
+
+# Close the terminal
+keybind = ctrl+q=quit
+
+# Send ESC + CR on shift+enter (multiline prompts in REPLs, Claude Code, etc.)
+keybind = shift+enter=text:\x1b\r
